@@ -4,7 +4,7 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = fdf_init.c
+SRCS = fdf_init.c hooked.c draw.c
 
 OBJS = $(SRCS:.c=.o)
 
