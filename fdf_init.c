@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 11:04:36 by tbousque          #+#    #+#             */
-/*   Updated: 2021/12/13 22:31:08 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:22:42 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void image_put_triangle(t_img img, t_point a, t_point b, t_point c)
 
 int	main(int argc, char **argv)
 {
+	/*
 	t_mlx_info	context;
 	t_point a = {.x = 100, .y = 50};
 	t_point b = {.x = 370, .y = 153};
@@ -57,5 +58,9 @@ int	main(int argc, char **argv)
 	mlx_put_image_to_window(context.mlx_ptr, context.win_ptr, context.img.ptr, 0, 0);
 	mlx_key_hook(context.win_ptr, &key_exit, &context);
 	mlx_loop(context.mlx_ptr);
+	*/
+	if (argc < 2)
+		return (1); //no file given
+	test_parse(argv[1]);
 	return (0);
 }

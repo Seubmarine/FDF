@@ -2,28 +2,33 @@ NAME = fdf
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -g3 -Wall -Werror -Wextra
 
-SRCS = fdf_init.c hooked.c draw.c
+SRCS = fdf_init.c hooked.c draw.c parsing.c
 
 OBJS = $(SRCS:.c=.o)
 
+LIBFT = libft/libft.a
+
 MLX = minilibx-linux/libmlx.a
 
-LIBS = -L minilibx-linux/ -lmlx -lXext -lX11
+LIBS = -L minilibx-linux/ -lmlx -lXext -lX11 -L libft/ -lft
 
-INCLUDES = -I minilibx-linux/
+INCLUDES = -I minilibx-linux/ -I libft/includes
 
 .PHONY: all clean fclean re
 
 
 all: $(NAME)
 
-$(NAME): $(MLX) $(OBJS)
+$(NAME): $(MLX) $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBS) -o $(NAME)
 
 $(MLX):
 	$(MAKE) -C $(MLX:libmlx.a=)
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFT:libft.a=)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) $< -c
