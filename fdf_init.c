@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 11:04:36 by tbousque          #+#    #+#             */
-/*   Updated: 2022/01/20 12:22:42 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:57:23 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,13 @@ int	main(int argc, char **argv)
 	mlx_key_hook(context.win_ptr, &key_exit, &context);
 	mlx_loop(context.mlx_ptr);
 	*/
+	
 	if (argc < 2)
-		return (1); //no file given
+	{
+		write(1, "Error: Not enough arg\n", 22);
+		return (1);
+	}
 	test_parse(argv[1]);
+	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:57 by tbousque          #+#    #+#             */
-/*   Updated: 2022/01/20 12:43:02 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/04/29 17:05:13 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char	**put_file_in_line(char *str)
 		}
 		i++;
 	}
+	line[line_index] = NULL;
 	return (line);
 }
 
@@ -106,40 +107,76 @@ size_t	get_num(char *line)
 	num = 0;
 	while (line[i])
 	{
-		while (line[i] == ' ')
-			i++;
-		if (!line[i])
-			break ;
+		
 		if (line[i] != ' ')
 		{
 			num++;
-			printf("%c ",line[i]);
+			//printf("(num++ = %li)\n", num);
+			while (line[i] != ' ' && line[i])
+			{
+				printf("%c",line[i]);
+				i++;
+			}
+			printf(" ");
 		}
-		while (line[i] != ' ' && line[i])
+		else
 			i++;
 	}
+	printf("\n");
 	return (num);
 }
 
+typedef struct s_file_info
+{	
+	size_t wordcount;
+	size_t newlinecount;
+	size_t bytecount;
+}	t_file_info;
+
+t_file_info get_file_info(char *file)
+{
+	size_t i = 0;
+	t_file_info file_info = {};
+	
+	while (file[i])
+	{
+		if (file[i] == '\n')
+			file_info.newlinecount++;
+		i++;
+	}
+	i = 0;
+	while (file[i])
+	{
+		if (!ft_isspace(file[i]))
+		{
+			file_info.wordcount++;
+			while (!ft_isspace(file[i]) && file[i])
+			{
+				i++;
+			}
+		}
+		else
+			i++;
+	}
+	file_info.bytecount = ft_strlen(file);
+	return (file_info);
+}
+
+#include <string.h>
 int test_parse(char *path)
 {
 	char	*file;
-	char	**line;
-	size_t	line_index;
-	size_t	total_number;
+	//char	**line;
+	//size_t	line_index;
+	//size_t	total_number;
 
-	line_index = 0;
-	total_number = 0;
+	file = NULL;
 	file = get_file_str(path);
-	line = put_file_in_line(file);
-	while (line[line_index])
-	{
-		printf("\nyolo ");
-		total_number += get_num(line[line_index]);
-		line_index++;
-	}
-	printf("\n%lu\n", total_number);
-	free(line);
+	if (!file)
+		return (1);
+	t_file_info info = get_file_info(file);
+	printf("info:   nl : %li   word : %li   byte : %li", info.newlinecount, info.wordcount, info.bytecount);
+	int *points = malloc(sizeof(*points) * info.wordcount);
 	free(file);
 	return (0);
 }

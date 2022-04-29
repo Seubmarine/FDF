@@ -10,7 +10,7 @@ void	mlx_context_free(t_mlx_info *context)
 
 int	key_exit(int keycode, t_mlx_info *mlx_info)
 {
-	printf("keycode : %d as been pressed\n", keycode);
+	printf("keycode : %d as been released\n", keycode);
 	if (keycode == 114)
 		mlx_clear_window(mlx_info->mlx_ptr, mlx_info->win_ptr);
 	else if (keycode == 65307 || keycode == 113 || keycode == 65477)
