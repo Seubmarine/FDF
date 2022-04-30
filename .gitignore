@@ -1,4 +1,5 @@
 #LIB
+libft/
 *.a
 
 *.o
