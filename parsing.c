@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:57 by tbousque          #+#    #+#             */
-/*   Updated: 2022/04/29 17:05:13 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/04/30 14:07:50 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,9 +151,7 @@ t_file_info get_file_info(char *file)
 		{
 			file_info.wordcount++;
 			while (!ft_isspace(file[i]) && file[i])
-			{
 				i++;
-			}
 		}
 		else
 			i++;
@@ -162,13 +160,31 @@ t_file_info get_file_info(char *file)
 	return (file_info);
 }
 
-#include <string.h>
+void file_to_point(char *file, int *array, int point_count)
+{
+	size_t				i;
+	long long	current_word;
+	char				*file_next_pos;
+	(void)point_count;
+
+	i = 0;
+	while (*file)
+	{
+		current_word = ft_strtoll(file, &file_next_pos, 10);
+		if (file_next_pos == file)
+			file++;
+		else
+		{
+			file = file_next_pos;
+			array[i] = current_word;
+			i++;
+		}
+	}
+}
+
 int test_parse(char *path)
 {
 	char	*file;
-	//char	**line;
-	//size_t	line_index;
-	//size_t	total_number;
 
 	file = NULL;
 	file = get_file_str(path);
@@ -177,6 +193,8 @@ int test_parse(char *path)
 	t_file_info info = get_file_info(file);
 	printf("info:   nl : %li   word : %li   byte : %li", info.newlinecount, info.wordcount, info.bytecount);
 	int *points = malloc(sizeof(*points) * info.wordcount);
+	file_to_point(file, points, info.wordcount);
 	free(file);
+	free(points);
 	return (0);
 }
