@@ -4,7 +4,7 @@ CC = gcc
 
 CFLAGS = -g3 -Wall -Werror -Wextra
 
-SRCS = fdf_init.c hooked.c draw.c parsing.c
+SRCS = fdf_init.c hooked.c draw.c parsing.c vector2.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -12,7 +12,7 @@ LIBFT = libft/libft.a
 
 MLX = minilibx-linux/libmlx.a
 
-LIBS = -L minilibx-linux/ -lmlx -lXext -lX11 -L libft/ -lft
+LIBS = -lm -L minilibx-linux/ -lmlx -lXext -lX11 -L libft/ -lft
 
 INCLUDES = -I minilibx-linux/ -I libft/includes
 

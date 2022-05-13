@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 08:14:04 by tbousque          #+#    #+#             */
-/*   Updated: 2022/01/20 05:39:36 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/05/13 19:02:43 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 # define FDF_H
 # include"mlx.h"
 # include"get_next_line.h"
+# include "vector2.h"
 # include<stddef.h>
 # include<stdlib.h>
 # define DEBUG 1
 # if DEBUG
 #  include<stdio.h>
 # endif
+
+typedef struct s_rect
+{
+	t_vector2	vertices[4];
+}	t_rect;
 
 typedef struct s_img
 {
@@ -28,18 +34,15 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
-}	t_img;
-
-typedef struct s_point
-{
 	int x;
 	int y;
-}	t_point;
+}	t_img;
 
 typedef struct s_mlx_info
 {
-	void *mlx_ptr;
-	void *win_ptr;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_rect	map;
 	t_img img;
 } t_mlx_info;
 
