@@ -1,7 +1,8 @@
 #LIB
 libft/
+.vscode
 *.a
-
+*.code-workspace
 *.o
 *.out
 fdf

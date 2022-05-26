@@ -4,9 +4,9 @@ CC = gcc
 
 CFLAGS = -g3 -Wall -Werror -Wextra
 
-SRCS = fdf_init.c hooked.c draw.c parsing.c vector2.c
+SRCS = fdf_init.c hooked.c draw.c parsing.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o) ft_3d/ft_3d
 
 LIBFT = libft/libft.a
 
@@ -14,7 +14,7 @@ MLX = minilibx-linux/libmlx.a
 
 LIBS = -lm -L minilibx-linux/ -lmlx -lXext -lX11 -L libft/ -lft
 
-INCLUDES = -I minilibx-linux/ -I libft/includes
+INCLUDES = -I minilibx-linux/ -I libft/includes -I ft_3d/
 
 .PHONY: all clean fclean re
 
