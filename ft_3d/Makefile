@@ -1,4 +1,4 @@
-NAME = ft_3d
+NAME = libft_3d.a
 
 CC = gcc
 
@@ -8,9 +8,9 @@ SRCS = mesh.c matrix.c vec2di.c vec3d.c
 
 OBJS = $(SRCS:.c=.o)
 
-LIBS = 
+LIBS = -lm
 
-INCLUDES = 
+INCLUDES = -I . -I .. -I ../minilibx-linux/
 
 .PHONY: all clean fclean re
 
@@ -18,10 +18,11 @@ INCLUDES =
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)
+	ar rcs $(NAME) $(OBJS)
+#$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)#
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) $< -c
+	$(CC) $(CFLAGS) $(INCLUDES) $< -c $(LIBS)
 
 clean:
 	-rm -f $(OBJS)
