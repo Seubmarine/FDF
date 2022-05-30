@@ -13,10 +13,12 @@ t_img	image_create(void *mlx_ptr, int size_x, int size_y)
 
 void image_put_pixel(t_img img, int x, int y, unsigned int rgb)
 {
-	char	*dst;
-
-	dst = img.buffer + (y * img.size_line + x * (img.bits_per_pixel / 8));
-	*(unsigned int*)dst = rgb;
+	//char	*dst;
+	if (x < 0 || x > img.x || y < 0 || y > img.y)
+		return ;
+	//dst = img.buffer + (y * img.size_line + x * (img.bits_per_pixel / 8));
+	//*(unsigned int*)dst = rgb;
+	((unsigned int *)img.buffer)[y * img.x + x] = rgb;
 }
 
 //wireframe triangle
