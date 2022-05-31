@@ -6,14 +6,14 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 02:27:10 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 06:14:46 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:51:35 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE  4096
+#  define BUFFER_SIZE 4194304
 # endif
 # include <stddef.h>
 # include <fcntl.h>

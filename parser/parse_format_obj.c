@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 22:15:14 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 10:11:22 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:37:36 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,16 @@ t_edge	*parse_edges(char **lines, t_edge *edges)
 		{
 			line = *lines + 1;
 			first_vertex_index = &(edges[e_index].e[0]);
-			while (*line)
+			while (line && *line)
 			{
 				edges[e_index].e[0] = ft_strtoll(line, &line, 10) - 1;
 				line = ft_strchr(line, ' ');
-				edges[e_index].e[1] = ft_strtoll(line, NULL, 10) - 1;
-				while (*line != '\0' && *line == ' ')
-					line++;
+				if (line != NULL)
+				{
+					edges[e_index].e[1] = ft_strtoll(line, NULL, 10) - 1;
+					while (*line != '\0' && *line == ' ')
+						line++;
+				}
 				e_index++;
 			}
 			edges[e_index - 1].e[1] = *first_vertex_index;
