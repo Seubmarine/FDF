@@ -53,7 +53,7 @@ void	scan_line(t_img img, int x1, int x2, int y)
 		x1++;
 	}
 }
-
+/*
 //Bresenham algorithm
 void	image_draw_line(t_img img, int x0, int y0, int x1, int y1) {
 
@@ -79,29 +79,52 @@ void	image_draw_line(t_img img, int x0, int y0, int x1, int y1) {
 		}
 	}
 }
-/*
-void	image_draw_line(t_img img, int x1, int y1, int x2, int y2)
-{
-	int	dx;
-	int	dy;
-	int	p;
-
-	dx = x2 - x1;
-	dy = y2 - y1;
-	while (x1 < x2)
-	{
-	if (p >= 0)
-		{
-			image_put_pixel(img, x1, y1, 0xFFFFFFFF);
-			y1 += 1;
-			p = p + dy * 2 - dx * 2;
-		}
-		else
-		{
-			image_put_pixel(img, x1, y1, 0xFFFFFFFF);
-			p = p + dx * 2;
-		}
-		x1 += 1;
-	}
-}
 */
+
+#include <stdbool.h>
+void image_draw_line(t_img surface, int x, int y, int x2, int y2) {
+   	bool yLonger=false;
+	int shortLen=y2-y;
+	int longLen=x2-x;
+	if (abs(shortLen)>abs(longLen)) {
+		int swap=shortLen;
+		shortLen=longLen;
+		longLen=swap;				
+		yLonger=true;
+	}
+	int decInc;
+	if (longLen==0) decInc=0;
+	else decInc = (shortLen << 16) / longLen;
+
+	if (yLonger) {
+		if (longLen>0) {
+			longLen+=y;
+			for (int j=0x8000+(x<<16);y<=longLen;++y) {
+				image_put_pixel(surface,j >> 16,y, 0xFF34EBE5);	
+				j+=decInc;
+			}
+			return;
+		}
+		longLen+=y;
+		for (int j=0x8000+(x<<16);y>=longLen;--y) {
+			image_put_pixel(surface,j >> 16,y, 0xFF34EBE5);	
+			j-=decInc;
+		}
+		return;	
+	}
+
+	if (longLen>0) {
+		longLen+=x;
+		for (int j=0x8000+(y<<16);x<=longLen;++x) {
+			image_put_pixel(surface,x,j >> 16, 0xFF34EBE5);
+			j+=decInc;
+		}
+		return;
+	}
+	longLen+=x;
+	for (int j=0x8000+(y<<16);x>=longLen;--x) {
+		image_put_pixel(surface,x,j >> 16, 0xFF34EBE5);
+		j-=decInc;
+	}
+
+}
