@@ -6,12 +6,11 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 11:04:36 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 04:03:40 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:02:24 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
 
 //6 motion notify, OL all
 int	main(int argc, char **argv)
@@ -25,7 +24,7 @@ int	main(int argc, char **argv)
 	}
 	mlx.mlx_ptr = mlx_init();
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, SCREEN_X, SCREEN_Y, "FDF");
-	mlx.img = image_create(mlx.mlx_ptr, 1280, 652);
+	mlx.img = image_create(mlx.mlx_ptr, SCREEN_X, SCREEN_Y);
 	mlx.map = parse_file_to_mesh(argv[1]);
 	if (mlx.map == NULL)
 		return (EXIT_FAILURE);
