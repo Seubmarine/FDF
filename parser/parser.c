@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:57 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 03:11:29 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/05/31 06:56:22 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,27 @@ char	**get_file_lines(char *filename)
 		return (NULL);
 	}
 	return (lines);
+}
+
+size_t	str_count_word(char *str)
+{
+	size_t	word_count;
+	size_t	i;
+
+	word_count = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != ' ')
+		{
+			word_count++;
+			while (str[i] != '\0' && str[i] != ' ')
+				i++;
+		}
+		else
+			i++;
+	}
+	return (word_count);
 }
 
 t_mesh	*parse_file_to_mesh(char *filename)
