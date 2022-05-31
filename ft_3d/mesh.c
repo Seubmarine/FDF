@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:39:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 02:27:00 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:48:55 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ size_t edges_size, t_edge *edges)
 
 	printf("mesh total size in byte: %lu\n", t_byte);
 	printf("\tmesh size: %lu\n", m_byte);
-	printf("\tedge size: %lu\n", e_byte);
-	printf("\tvert size: %lu\n", v_byte);
+	printf("\tedge size: %lu, byte: %lu\n", e_byte / sizeof(t_edge), e_byte);
+	printf("\tvert size: %lu, byte: %lu\n", v_byte/ sizeof(t_vec3d) / 2, v_byte);
 	mesh = malloc(t_byte);
 	ft_bzero(mesh, t_byte);
 	if (!mesh)
@@ -66,15 +66,15 @@ void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj)
 	while (i < mesh->vertices_size)
 	{
 		vertex = mesh->vertices[i];
+		vertex.z -= 10.0f;
 		vertex = vec3d_projected(vertex, mesh->transform);
+		vertex.z += 30.0f;
 		vertex = vec3d_projected(vertex, proj);
 		vertex.x += 1.0f;
 		vertex.y += 1.0f;
 		vertex.x *= 0.5f * img.x;
 		vertex.y *= 0.5f * img.y;
 		mesh->vertices_projected[i] = vertex;
-		if (vertex.z < 1.0)
-			image_put_pixel(img, vertex.x, vertex.y, 0xFF34EBE5);
 		i++;
 	}
 	i = 0;
@@ -83,7 +83,9 @@ void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj)
 		current_edge = mesh->edges[i];
 		v1 = mesh->vertices_projected[current_edge.e[0]];
 		v2 = mesh->vertices_projected[current_edge.e[1]];
-		image_draw_line(img, v1.x, v1.y, v2.x, v2.y);
+		if (!((v1.x < 0 || v1.x > img.x) || (v1.y < 0 || v1.y > img.y) ||
+		(v2.x < 0 || v2.x > img.x) || (v2.y < 0 || v2.y > img.y)))
+			image_draw_line(img, v1.x, v1.y, v2.x, v2.y);
 		i++;
-	}	
+	}
 }
