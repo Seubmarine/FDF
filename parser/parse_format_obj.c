@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 22:15:14 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 02:02:26 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/05/31 03:13:16 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ size_t	count_line_begin_with(char	**lines, const char *cmp, size_t cmp_size)
 	return (count);
 }
 
-void str_to_vec3d(char *str, t_vec3d *v)
+//WARNING: CHANGE TO OWN STRTOF IMPLEMENTATION
+static void	str_to_vec3d(char *str, t_vec3d *v)
 {
 	v->x = strtof(str, &str);
 	v->y = strtof(str, &str);
@@ -40,13 +41,13 @@ void str_to_vec3d(char *str, t_vec3d *v)
 t_mesh	*parse_format_obj(char **lines)
 {
 	const size_t	vertices_size = count_line_begin_with(lines, "v ", 2);
-	t_vec3d *vertices;
-	t_mesh *mesh;
-	size_t	v_index;
+	t_vec3d			*vertices;
+	t_mesh			*mesh;
+	size_t			v_index;
 
 	vertices = malloc(sizeof(*vertices) * vertices_size);
 	if (vertices == NULL)
-		return (NULL); //error when allocating
+		return (NULL);
 	v_index = 0;
 	while (*lines)
 	{
