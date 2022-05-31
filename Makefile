@@ -21,7 +21,7 @@ INCLUDES = -I . -I minilibx-linux/ -I libft/includes -I ft_3d/ -I parser/
 
 all: $(NAME)
 
-$(NAME): $(LIBFT_3D) $(OBJS)
+$(NAME): $(MLX) $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) $(LIBS)
 
 $(MLX):
