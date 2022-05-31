@@ -2,15 +2,13 @@ NAME = libft_3d.a
 
 CC = gcc
 
-CFLAGS = -g3 -Wall -Werror -Wextra
+CFLAGS = -g3 -Ofast -Wall -Werror -Wextra
 
 SRCS = mesh.c matrix.c vec2di.c vec3d.c
 
 OBJS = $(SRCS:.c=.o)
 
-LIBS = -lm
-
-INCLUDES = -I . -I .. -I ../minilibx-linux/
+INCLUDES = -I . -I .. -I ../minilibx-linux/ -I ../libft/includes/
 
 .PHONY: all clean fclean re
 
@@ -22,7 +20,7 @@ $(NAME): $(OBJS)
 #$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)#
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) $< -c $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDES) $< -c
 
 clean:
 	-rm -f $(OBJS)
