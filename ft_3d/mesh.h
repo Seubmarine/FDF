@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:21:27 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/26 05:36:55 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/05/31 02:02:03 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define MESH_H
 # include <stddef.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include "libft.h"
+# include "string.h"
 # include "matrix.h"
 # include "vec3d.h"
 # include "mlx_image.h"
