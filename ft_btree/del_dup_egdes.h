@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   del_dup_egdes.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/29 02:27:10 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/02 07:52:22 by tbousque         ###   ########.fr       */
+/*   Created: 2022/06/02 07:47:50 by tbousque          #+#    #+#             */
+/*   Updated: 2022/06/02 07:50:21 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4194304
-# endif
-# include "bit_array.h"
-# include <stddef.h>
-# include <fcntl.h>
-# include "libft.h"
-# include "mesh.h"
-# include "del_dup_egdes.h"
+#ifndef DEL_DUP_EDGES_H
+# define DEL_DUP_EDGES_H
 # include <stdio.h>
-
-char	**get_lines_of_file(char *str);
-char	*get_file_str(char *path);
-size_t	str_count_word(char *str);
-t_mesh	*parse_format_obj(char **lines);
-t_mesh	*parse_file_to_mesh(char *filename);
-#endif
+# include "ft_btree.h"
+# include "mesh.h"
+t_edge	*remove_egdes_double(t_edge *edges, size_t *egdes_size);
+# endif
