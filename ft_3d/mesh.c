@@ -6,11 +6,20 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:39:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 16:48:55 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/02 05:37:16 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mesh.h"
+
+t_edge edge(size_t a, size_t b)
+{
+	t_edge e;
+
+	e.e[0] = a;
+	e.e[1] = b;
+	return (e);
+}
 
 t_mesh	*mesh_init(size_t vertices_size, t_vec3d *vertices,
 size_t edges_size, t_edge *edges)

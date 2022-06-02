@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 22:15:14 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 17:37:36 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/02 05:30:33 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,29 +68,25 @@ size_t	count_edges(char **lines)
 t_edge	*parse_edges(char **lines, t_edge *edges)
 {
 	char	*line;
-	size_t	e_index;
-	size_t	*first_vertex_index;
+	int		i_temp;
+	size_t	temp_face[64];
 
-	e_index = 0;
 	while (*lines)
 	{
 		if (ft_strncmp(*lines, "f ", 2) == 0)
 		{
-			line = *lines + 1;
-			first_vertex_index = &(edges[e_index].e[0]);
-			while (line && *line)
+			line = ft_strchr(*lines, ' ');
+			i_temp = 0;
+			while (line && *line && i_temp < 64)
 			{
-				edges[e_index].e[0] = ft_strtoll(line, &line, 10) - 1;
-				line = ft_strchr(line, ' ');
-				if (line != NULL)
-				{
-					edges[e_index].e[1] = ft_strtoll(line, NULL, 10) - 1;
-					while (*line != '\0' && *line == ' ')
-						line++;
-				}
-				e_index++;
+				temp_face[i_temp++] = ft_strtoll(line, &line, 10) - 1;
+				line = strchr(line, ' ');
+				while (line && *line && *line == ' ')
+					line++;
 			}
-			edges[e_index - 1].e[1] = *first_vertex_index;
+			*edges++ = edge(temp_face[0], temp_face[--i_temp]);
+			while (--i_temp >= 0)
+				*edges++ = edge(temp_face[i_temp], temp_face[i_temp + 1]);
 		}
 		lines++;
 	}
