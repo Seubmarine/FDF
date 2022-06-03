@@ -27,6 +27,7 @@ t_edge *remove_egdes_double(t_edge *edges, size_t *egdes_size)
 		i++;
 	}
 	btree_apply_infix(mytree, &btree_print);
+	btree_free(mytree);
 	return (edges);
 }
 
