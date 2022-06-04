@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 02:27:10 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/02 07:52:22 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/04 05:44:53 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4194304
 # endif
-# include "bit_array.h"
 # include <stddef.h>
 # include <fcntl.h>
 # include "libft.h"
