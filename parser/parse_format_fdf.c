@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:43:43 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/04 09:12:30 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/04 09:40:31 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ void	parse_vertices(char **lines, t_vec3d *vertices, size_t vertices_size)
 		x = 0;
 		while (*line)
 		{
-			
 			vertices[i].z = (float) ft_strtoll(line, &line, 10);
+			while (*line && *line != ' ')
+				line++;
 			while (*line && *line == ' ')
 				line++;
 			vertices[i].x = (float) x;
@@ -67,9 +68,8 @@ void	parse_vertices(char **lines, t_vec3d *vertices, size_t vertices_size)
 	}
 }
 
-void	parse_edges_fdf(t_edge *edges, size_t edges_size, size_t num_per_line, size_t line_count)
+void	parse_edges_fdf(t_edge *edges, size_t num_per_line, size_t line_count)
 {
-	(void) edges_size;
 	size_t x;
 	size_t y;
 
@@ -82,11 +82,17 @@ void	parse_edges_fdf(t_edge *edges, size_t edges_size, size_t num_per_line, size
 			(*edges).e[0] = x + (y * num_per_line);
 			(*edges).e[1] = x + (y * num_per_line) + 1;
 			edges++;
-			if (x + ((y + 1) * num_per_line) < edges_size)
+			if (y < line_count - 1)
 			{
 				(*edges).e[0] = x + (y * num_per_line);
 				(*edges).e[1] = ((y + 1) * num_per_line) + x;
 				edges++;
+				if (!(x + 1 < num_per_line - 1))
+				{
+					(*edges).e[0] = ++x + (y * num_per_line);
+					(*edges).e[1] = ((y + 1) * num_per_line) + x;
+					edges++;
+				}
 			}	
 			x++;
 		}
@@ -118,7 +124,7 @@ t_mesh	*parse_format_fdf(char **lines)
 	}
 	ft_memset(edges, 0, sizeof(*edges) * edges_size);
 	parse_vertices(lines, vertices, vertices_size);
-	parse_edges_fdf(edges, edges_size, word_per_line, line_count);
+	parse_edges_fdf(edges, word_per_line, line_count);
 	mesh = mesh_init(vertices_size, vertices, edges_size, edges);
 	if (mesh == NULL)
 		return (NULL);
