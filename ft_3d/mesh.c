@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:39:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/02 05:37:16 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/04 05:50:24 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_mesh	*mesh_init_cube(void)
 	return (mesh);
 }
 
-void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj)
+void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, int rgb)
 {
 	size_t	i;
 	t_vec3d	vertex;
@@ -94,7 +94,7 @@ void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj)
 		v2 = mesh->vertices_projected[current_edge.e[1]];
 		if (!((v1.x < 0 || v1.x > img.x) || (v1.y < 0 || v1.y > img.y) ||
 		(v2.x < 0 || v2.x > img.x) || (v2.y < 0 || v2.y > img.y)))
-			image_draw_line(img, v1.x, v1.y, v2.x, v2.y);
+			image_draw_line(img, v1.x, v1.y, v2.x, v2.y, rgb);
 		i++;
 	}
 }

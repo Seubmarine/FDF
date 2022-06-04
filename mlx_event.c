@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:05:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 02:35:50 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/04 06:07:03 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	mouse_event(int x, int y, t_mlx_info *info)
 	printf("relative: %i, %i\n", relative.x, relative.y);
 	
 	image_clear(info->img);
-	mesh_draw(info->map, info->img, info->proj);
+	mesh_draw(info->map, info->img, info->proj, 0xFF34EBE5);
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.ptr, 0, 0);
 	return (0);
 }

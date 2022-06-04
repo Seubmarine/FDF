@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:21:27 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/02 04:15:03 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/04 05:50:54 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ typedef struct s_mesh
 t_edge	edge(size_t a, size_t b);
 t_mesh	*mesh_init(size_t vertices_size, t_vec3d *vertices, size_t edges_size, t_edge *edges);
 t_mesh	*mesh_init_cube(void);
-void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj);
+void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, int rgb);
 #endif

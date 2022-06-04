@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 05:12:18 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/30 05:36:15 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/04 05:50:32 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ typedef struct s_img
 
 void	image_put_pixel(t_img img, int x, int y, unsigned int rgb);
 t_img	image_create(void *mlx_ptr, int size_x, int size_y);
-void	image_draw_line(t_img img, int x0, int y0, int x1, int y1);
+void	image_draw_line(t_img img, int x0, int y0, int x1, int y1, int rgb);
 void	image_clear(t_img img);
 #endif

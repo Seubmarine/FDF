@@ -13,26 +13,21 @@ t_img	image_create(void *mlx_ptr, int size_x, int size_y)
 
 void image_put_pixel(t_img img, int x, int y, unsigned int rgb)
 {
-	//char	*dst;
-	if (x < 0 || x > img.x || y < 0 || y > img.y)
-		return ;
-	//dst = img.buffer + (y * img.size_line + x * (img.bits_per_pixel / 8));
-	//*(unsigned int*)dst = rgb;
 	((unsigned int *)img.buffer)[y * img.x + x] = rgb;
 }
 
 //wireframe triangle
-void image_put_triangle(t_img img, t_vec2di a, t_vec2di b, t_vec2di c)
-{
-	image_draw_line(img, a.x, a.y, b.x, b.y);
-	image_draw_line(img, b.x, b.y, c.x, c.y);
-	image_draw_line(img, c.x, c.y, a.x, a.y);
-}
+// void image_put_triangle(t_img img, t_vec2di a, t_vec2di b, t_vec2di c)
+// {
+// 	image_draw_line(img, a.x, a.y, b.x, b.y);
+// 	image_draw_line(img, b.x, b.y, c.x, c.y);
+// 	image_draw_line(img, c.x, c.y, a.x, a.y);
+// }
 
-void image_draw_line_from_vec2di(t_img img, t_vec2di a, t_vec2di b)
-{
-	image_draw_line(img, a.x, a.y, b.x, b.y);
-}
+// void image_draw_line_from_vec2di(t_img img, t_vec2di a, t_vec2di b)
+// {
+// 	image_draw_line(img, a.x, a.y, b.x, b.y);
+// }
 
 #include <string.h>
 void	image_clear(t_img img)
@@ -81,8 +76,10 @@ void	image_draw_line(t_img img, int x0, int y0, int x1, int y1) {
 }
 */
 
+//0xFF34EBE5
+
 #include <stdbool.h>
-void image_draw_line(t_img surface, int x, int y, int x2, int y2) {
+void image_draw_line(t_img surface, int x, int y, int x2, int y2, int rgb) {
    	bool yLonger=false;
 	int shortLen=y2-y;
 	int longLen=x2-x;
@@ -100,14 +97,14 @@ void image_draw_line(t_img surface, int x, int y, int x2, int y2) {
 		if (longLen>0) {
 			longLen+=y;
 			for (int j=0x8000+(x<<16);y<=longLen;++y) {
-				image_put_pixel(surface,j >> 16,y, 0xFF34EBE5);	
+				image_put_pixel(surface,j >> 16,y, rgb);	
 				j+=decInc;
 			}
 			return;
 		}
 		longLen+=y;
 		for (int j=0x8000+(x<<16);y>=longLen;--y) {
-			image_put_pixel(surface,j >> 16,y, 0xFF34EBE5);	
+			image_put_pixel(surface,j >> 16,y, rgb);	
 			j-=decInc;
 		}
 		return;	
@@ -116,14 +113,14 @@ void image_draw_line(t_img surface, int x, int y, int x2, int y2) {
 	if (longLen>0) {
 		longLen+=x;
 		for (int j=0x8000+(y<<16);x<=longLen;++x) {
-			image_put_pixel(surface,x,j >> 16, 0xFF34EBE5);
+			image_put_pixel(surface,x,j >> 16, rgb);
 			j+=decInc;
 		}
 		return;
 	}
 	longLen+=x;
 	for (int j=0x8000+(y<<16);x>=longLen;--x) {
-		image_put_pixel(surface,x,j >> 16, 0xFF34EBE5);
+		image_put_pixel(surface,x,j >> 16, rgb);
 		j-=decInc;
 	}
 
