@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:57 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 06:56:22 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/04 06:49:31 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ t_mesh	*parse_file_to_mesh(char *filename)
 		return (NULL);
 	if (format == format_obj)
 		mesh = parse_format_obj(lines);
+	else if (format == format_fdf)
+		mesh = parse_format_fdf(lines);
 	free(*lines);
 	free(lines);
 	return (mesh);

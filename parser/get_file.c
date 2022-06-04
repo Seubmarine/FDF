@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:51:14 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 02:59:57 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/04 07:41:03 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ size_t	file_count_row(char *str)
 			row++;
 		i++;
 	}
-	return (row);
+	return (row + 1);
 }
 
 char	**get_lines_of_file(char *str)
