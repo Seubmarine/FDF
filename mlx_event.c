@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:05:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/09 11:02:14 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/09 14:02:05 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	key_event(int keycode, t_mlx_info *info)
 		mlx_context_free(info);
 		exit(0);
 	}
-	if (keycode == 65293)
-		load_new_file(info);
+	if (keycode == KEY_L)
+	 	load_new_file(info);
 	return (0);
 }
 
