@@ -19,6 +19,7 @@ typedef struct s_mat4x4
 } t_mat4x4;
 
 t_mat4x4    mat4x4_product(t_mat4x4 a, t_mat4x4 b);
+t_mat4x4    set_paralel_matrix(float right, float left, float top, float bottom, float far, float near);
 t_mat4x4    set_projection_matrix(float near, float far, float fov,
     float aspect_ratio);
 t_mat4x4    mat4x4_scale(float x, float y, float z);

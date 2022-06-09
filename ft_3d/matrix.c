@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:55:16 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/26 19:41:24 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/09 13:40:52 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,22 @@ t_mat4x4    mat4x4_scale(float x, float y, float z)
     m.m[2][2] = z;
     m.m[3][3] = 1;
     return (m);
+}
+
+t_mat4x4    set_paralel_matrix(float right, float left, float top, float bottom, float far, float near)
+{
+	t_mat4x4 m = {};
+	m.m[0][0] = 2 / (right - left);
+	m.m[1][1] = 2 / (top - bottom);
+	m.m[2][2] = -2 / (far - near);
+	m.m[3][3] = 1;
+	
+	m.m[0][3] = -(right + left) / (right - left);
+	
+	m.m[1][3] = -(top + bottom) / (top - bottom);
+	
+	m.m[2][3] = -(far + near) / (far - near);
+	return (m);
 }
 
 t_mat4x4    set_projection_matrix(float near, float far, float fov,
