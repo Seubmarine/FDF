@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seub <seub@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:32:51 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 01:59:14 by seub             ###   ########.fr       */
+/*   Updated: 2022/06/10 21:14:21 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,46 @@ t_vec3d	vec3d(float x, float y, float z)
 	return ((t_vec3d){x, y, z});
 }
 
-t_vec3d	vec3d_projected(t_vec3d i, t_mat4x4 m)
+t_vec3d vec3d_sub(t_vec3d *a, t_vec3d *b)
 {
-	t_vec3d	o;
-	float	w;
+	t_vec3d v;
+	v.x = a->x - b->x; 
+	v.y = a->y - b->y; 
+	v.z = a->z - b->z;
+	return (v);
+}
 
-	o.x = i.x * m.m[0][0] + i.y * m.m[1][0] + i.z * m.m[2][0] + m.m[3][0];
-	o.y = i.x * m.m[0][1] + i.y * m.m[1][1] + i.z * m.m[2][1] + m.m[3][1];
-	o.z = i.x * m.m[0][2] + i.y * m.m[1][2] + i.z * m.m[2][2] + m.m[3][2];
-	w = i.x * m.m[0][3] + i.y * m.m[1][3] + i.z * m.m[2][3] + m.m[3][3];
-	if (w != 0.0f)
-	{
-		o.x /= w;
-		o.y /= w;
-		o.z /= w;
-	}
-	return (o);
+float vec3d_dotproduct(t_vec3d *a, t_vec3d *b)
+{
+	return (a->x * b->x + a->y * b->y + a->z * b->z);
+}
+
+float vec3d_length(t_vec3d *v)
+{
+	return(sqrtf(vec3d_dotproduct(v, v)));
+}
+
+t_vec3d vec3d_normalize(t_vec3d *v)
+{
+	float length = vec3d_length(v);
+	return ((t_vec3d) {v->x / length, v->y / length, v->z / length});
+}
+
+t_vec3d vec3d_mul(t_vec3d *v, float number)
+{
+	return ((t_vec3d) {v->x * number, v->y * number, v->z * number});
+}
+
+t_vec3d vec3d_add(t_vec3d *v1, t_vec3d *v2)
+{
+	return ((t_vec3d) {v1->x + v2->x, v1->y + v2->y, v1->z + v2->z});
+}
+
+t_vec3d vec3d_crossproduct(t_vec3d *v1, t_vec3d *v2)
+{
+		t_vec3d v;
+		v.x = v1->y * v2->z - v1->x * v2->y;
+		v.y = v1->z * v2->x - v1->x * v2->z;
+		v.z = v1->x * v2->y - v1->y * v2->x;
+		return v;
 }

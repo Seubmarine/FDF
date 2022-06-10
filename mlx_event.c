@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:05:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/09 14:02:05 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/10 22:00:33 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,47 @@ void	mlx_context_free(t_mlx_info *context)
 	free(context->mlx_ptr);
 }
 
+
+#define KEY_W 119
+#define KEY_D 100
+#define KEY_S 115
+#define KEY_A 97
+#define KEY_SPACE 32
+# define KEY_SHIFT 65505
+# define KEY_Q 113
 int	key_event(int keycode, t_mlx_info *info)
 {
+	mlx_do_key_autorepeaton(info->mlx_ptr);
+	printf("key:%d\n", keycode);
+	
+	if (keycode == KEY_W)
+		info->camera_pos.z += 1;
+	if (keycode == KEY_S)
+		info->camera_pos.z -= 1;
+	
+	if (keycode == KEY_D)
+		info->camera_pos.x += 1;
+	if (keycode == KEY_A)
+		info->camera_pos.x -= 1;
+
+	if (keycode == KEY_SPACE)
+		info->camera_pos.y += 1;
+	if (keycode == KEY_SHIFT)
+		info->camera_pos.y -= 1;
+	
 	if (keycode == 114)
 		image_clear(info->img);
-	if (keycode == 65307 || keycode == 113 || keycode == 65477)
+	
+	if (keycode == 65307 || keycode == 65477)
 	{
 		mlx_context_free(info);
 		exit(0);
 	}
 	if (keycode == KEY_L)
 	 	load_new_file(info);
+	image_clear(info->img);
+	mesh_draw(info->map, info->img, info->proj, &(info->camera_pos), &(info->look_dir),0xFF34EBE5);
+	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.ptr, 0, 0);
 	return (0);
 }
 
@@ -71,11 +101,12 @@ int	mouse_event(int x, int y, t_mlx_info *info)
 	t_mat4x4	rotx = mat4x4_rotate_x(angle_x);
 	t_mat4x4	rot = mat4x4_product(rotx, roty);
 	info->map->transform = rot;
+	//info->map->transform = mat4x4_scale(1, 1, 1);
 	
 	//printf("mouse: %i, %i\n", x, y);
 	//printf("relative: %i, %i\n", relative.x, relative.y);
 	image_clear(info->img);
-	mesh_draw(info->map, info->img, info->proj, 0xFF34EBE5);
+	mesh_draw(info->map, info->img, info->proj, &(info->camera_pos), &(info->look_dir),0xFF34EBE5);
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.ptr, 0, 0);
 	return (0);
 }

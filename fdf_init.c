@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 11:04:36 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 17:02:24 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/10 22:06:08 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int	main(int argc, char **argv)
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, SCREEN_X, SCREEN_Y, "FDF");
 	mlx.img = image_create(mlx.mlx_ptr, SCREEN_X, SCREEN_Y);
 	mlx.map = parse_file_to_mesh(argv[1]);
+	mlx.camera_pos = vec3d(0, 0, 0);
+	mlx.look_dir = vec3d(0, 0, 1);
+	mlx.map->transform = mat4x4_identity();
 	if (mlx.map == NULL)
 		return (EXIT_FAILURE);
 	mlx.proj = set_projection_matrix(0.1f, 1000.0f, 90.f, (float)mlx.img.y / (float)mlx.img.x);

@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:39:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/04 05:50:24 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/10 22:18:56 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,18 @@ t_mesh	*mesh_init_cube(void)
 	return (mesh);
 }
 
-void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, int rgb)
+t_mat4x4 get_view_mat(t_vec3d *camera_pos, t_vec3d *look_dir)
+{
+	t_vec3d up = {0, 1, 0};
+	t_vec3d target = {0, 0, 1};
+	
+	target = vec3d_add(camera_pos, look_dir);
+	t_mat4x4 camera_matrix = mat4x4_pointat(camera_pos, &target, &up);
+	t_mat4x4 view_matrix = mat4x4_lookat(&camera_matrix);
+	return (view_matrix);
+}
+
+void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, t_vec3d *camera_pos, t_vec3d *look_dir, int rgb)
 {
 	size_t	i;
 	t_vec3d	vertex;
@@ -71,13 +82,15 @@ void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, int rgb)
 	t_vec3d	v1;
 	t_vec3d	v2;
 
+	//t_mat4x4 view_mat = get_view_mat(camera_pos, look_dir);
+
 	i = 0;
 	while (i < mesh->vertices_size)
 	{
 		vertex = mesh->vertices[i];
-		vertex.z -= 10.0f;
 		vertex = vec3d_projected(vertex, mesh->transform);
-		vertex.z += 30.0f;
+		vertex.z += 10;
+		//vertex = vec3d_projected(vertex, view_mat);
 		vertex = vec3d_projected(vertex, proj);
 		vertex.x += 1.0f;
 		vertex.y += 1.0f;
@@ -93,7 +106,7 @@ void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, int rgb)
 		v1 = mesh->vertices_projected[current_edge.e[0]];
 		v2 = mesh->vertices_projected[current_edge.e[1]];
 		if (!((v1.x < 0 || v1.x > img.x) || (v1.y < 0 || v1.y > img.y) ||
-		(v2.x < 0 || v2.x > img.x) || (v2.y < 0 || v2.y > img.y)))
+		(v2.x < 0 || v2.x > img.x) || (v2.y < 0 || v2.y > img.y) || (v1.z > 1.0 || v2.z > 1.0)))
 			image_draw_line(img, v1.x, v1.y, v2.x, v2.y, rgb);
 		i++;
 	}
