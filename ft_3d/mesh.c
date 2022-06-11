@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:39:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 16:11:47 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/11 16:48:17 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ t_mat4x4 get_view_mat(t_camera *camera)
 	t_vec3d target = {0, 0, 1};
 	t_mat4x4 camrot = mat4x4_rotate_y(camera->yaw);
 	camera->look_dir = vec3d_projected(target, camrot);
+	
+//	up = vec3d(0, camera->pitch, 0);
 	target = vec3d_add(&(camera->pos), &(camera->look_dir));
 	t_mat4x4 camera_matrix = mat4x4_pointat(&(camera->pos), &target, &up);
 	t_mat4x4 view_matrix = mat4x4_lookat(&camera_matrix);
@@ -94,10 +96,9 @@ void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, t_camera *camera, int rgb
 	while (i < mesh->vertices_size)
 	{
 		vertex = mesh->vertices[i];
-		//vertex = vec3d_projected(vertex, mat4x4_identity());
-		//vertex.z += 15;
-		vertex = vec3d_projected(vertex, view_mat);
-		vertex = vec3d_projected(vertex, proj);
+		t_mat4x4 test = mat4x4_product(view_mat, proj);
+		//vertex = vec3d_projected(vertex, view_mat);
+		vertex = vec3d_projected(vertex, test);
 		vertex.x += 1.0f;
 		vertex.y += 1.0f;
 		vertex.x *= 0.5f * img.x;
