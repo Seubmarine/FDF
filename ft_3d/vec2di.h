@@ -6,13 +6,14 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:51:23 by tbousque          #+#    #+#             */
-/*   Updated: 2022/05/31 02:10:53 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/11 19:35:02 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC2DI_H
 # define VEC2DI_H
 # include <math.h>
+
 typedef struct s_vec2di
 {
 	int	x;

@@ -6,15 +6,15 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:39:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 18:46:45 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/11 19:40:40 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mesh.h"
 
-t_edge edge(size_t a, size_t b)
+t_edge	edge(size_t a, size_t b)
 {
-	t_edge e;
+	t_edge	e;
 
 	e.e[0] = a;
 	e.e[1] = b;
@@ -33,7 +33,7 @@ size_t edges_size, t_edge *edges)
 	printf("mesh total size in byte: %lu\n", t_byte);
 	printf("\tmesh size: %lu\n", m_byte);
 	printf("\tedge size: %lu, byte: %lu\n", e_byte / sizeof(t_edge), e_byte);
-	printf("\tvert size: %lu, byte: %lu\n", v_byte/ sizeof(t_vec3d) / 2, v_byte);
+	printf("\tvert size: %lu, byte: %lu\n", v_byte / sizeof(t_vec3d) / 2, v_byte);
 	mesh = malloc(t_byte);
 	ft_bzero(mesh, t_byte);
 	if (!mesh)
@@ -63,22 +63,26 @@ t_mesh	*mesh_init_cube(void)
 	return (mesh);
 }
 
-double to_rad(double degree)
+double	to_rad(double degree)
 {
 	return (degree * (3.14159f / 180.0));
 }
 
-t_mat4x4 get_view_mat(t_camera *camera)
+t_mat4x4	get_view_mat(t_camera *camera)
 {
-	t_vec3d up = {0, 1, 0};
-	t_vec3d target = {0, 0, 1};
-	t_mat4x4 camrot = mat4x4_rotate_y(camera->yaw);
+	t_vec3d		up;
+	t_vec3d		target;
+	t_mat4x4	camrot;
+	t_mat4x4	camera_matrix;
+	t_mat4x4	view_matrix;
+
+	up = (t_vec3d){0, 1, 0};
+	target = (t_vec3d){0, 0, 1};
+	camrot = mat4x4_rotate_y(camera->yaw);
 	camera->look_dir = vec3d_projected(target, camrot);
-	
-//	up = vec3d(0, camera->pitch, 0);
 	target = vec3d_add(&(camera->pos), &(camera->look_dir));
-	t_mat4x4 camera_matrix = mat4x4_pointat(&(camera->pos), &target, &up);
-	t_mat4x4 view_matrix = mat4x4_lookat(&camera_matrix);
+	camera_matrix = mat4x4_pointat(&(camera->pos), &target, &up);
+	view_matrix = mat4x4_lookat(&camera_matrix);
 	return (view_matrix);
 }
 
@@ -90,15 +94,12 @@ void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, t_camera *camera)
 	t_vec3d	v1;
 	t_vec3d	v2;
 
-	t_mat4x4 view_mat = get_view_mat(camera);
-
 	i = 0;
 	while (i < mesh->vertices_size)
 	{
 		vertex = mesh->vertices[i];
-		t_mat4x4 test = mat4x4_product(view_mat, proj);
-		//vertex = vec3d_projected(vertex, view_mat);
-		vertex = vec3d_projected(vertex, test);
+		vertex = vec3d_projected(vertex, mat4x4_product(\
+			get_view_mat(camera), proj));
 		vertex.x += 1.0f;
 		vertex.y += 1.0f;
 		vertex.x *= 0.5f * img.x;
@@ -112,8 +113,9 @@ void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, t_camera *camera)
 		current_edge = mesh->edges[i];
 		v1 = mesh->vertices_projected[current_edge.e[0]];
 		v2 = mesh->vertices_projected[current_edge.e[1]];
-		if (!((v1.x < 0 || v1.x > img.x) || (v1.y < 0 || v1.y > img.y) ||
-		(v2.x < 0 || v2.x > img.x) || (v2.y < 0 || v2.y > img.y) || (v1.z > 1.0 || v2.z > 1.0)))
+		if (!((v1.x < 0 || v1.x > img.x) || (v1.y < 0 || v1.y > img.y) || \
+			(v2.x < 0 || v2.x > img.x) || (v2.y < 0 || v2.y > img.y) \
+			|| (v1.z > 1.0 || v2.z > 1.0)))
 			image_draw_line(img, v1.x, v1.y, v2.x, v2.y, 0xFF45b566);
 		i++;
 	}
