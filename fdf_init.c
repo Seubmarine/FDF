@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 11:04:36 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 16:24:17 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/11 17:30:48 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv)
 	//mlx_key_hook(mlx.win_ptr, &key_event, &mlx);
 	mlx_hook(mlx.win_ptr, 2, 1L<<0, &key_event, &mlx);
 	mlx_hook(mlx.win_ptr, 6, 1L<<6, &mouse_event, &mlx);
+	mlx_hook(mlx.win_ptr, 17, 1L<<0, &mlx_context_free, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:05:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 16:30:10 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/11 17:31:30 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ static void load_new_file(t_mlx_info *info)
 	}
 }
 
-void	mlx_context_free(t_mlx_info *context)
+int	mlx_context_free(t_mlx_info *context)
 {
 	free(context->map);
 	mlx_destroy_image(context->mlx_ptr, context->img.ptr);
 	mlx_destroy_window(context->mlx_ptr, context->win_ptr);
 	mlx_destroy_display(context->mlx_ptr);
 	free(context->mlx_ptr);
+	exit(0);
+	return (0);
 }
 
 
@@ -45,29 +47,36 @@ void	mlx_context_free(t_mlx_info *context)
 #define KEY_S 115
 #define KEY_A 97
 #define KEY_SPACE 32
-# define KEY_SHIFT 65505
+# define KEY_C 99
 # define KEY_Q 113
-int	key_event(int keycode, t_mlx_info *info)
+# define MOVE_SPEED 0.2f;
+
+static void key_move(int keycode, t_mlx_info *info)
 {
-	printf("key:%d\n", keycode);
-	t_vec3d dir = vec3d(0, 0, 0);
+	t_vec3d	dir;
+	
+	dir = vec3d(0, 0, 0);
 	if (keycode == KEY_D)
-		dir.x += 1;
+		dir.x += MOVE_SPEED;
 	if (keycode == KEY_A)
-		dir.x -= 1;
+		dir.x -= MOVE_SPEED;
 	if (keycode == KEY_W)
-		dir.z += 1; 
+		dir.z += MOVE_SPEED; 
 	if (keycode == KEY_S)
-		dir.z -= 1;
+		dir.z -= MOVE_SPEED;
 	if (keycode == KEY_SPACE)
-		dir.y += 1;
-	if (keycode == KEY_SHIFT)
-		dir.y -= 1;
+		dir.y -= MOVE_SPEED;
+	if (keycode == KEY_C)
+		dir.y += MOVE_SPEED;
 	dir = vec3d_projected(dir, mat4x4_rotate_y(info->camera.yaw));
 	info->camera.pos = vec3d_add((&info->camera.pos), &dir);
+}
+
+int	key_event(int keycode, t_mlx_info *info)
+{
+	key_move(keycode, info);
 	if (keycode == 114)
 		image_clear(info->img);
-	
 	if (keycode == 65307 || keycode == 65477)
 	{
 		mlx_context_free(info);
@@ -84,29 +93,13 @@ int	key_event(int keycode, t_mlx_info *info)
 int	mouse_event(int x, int y, t_mlx_info *info)
 {
 	static t_vec2di	last = {.x = 0, .y = 0};
-	static double	angle_x = 0;
-	static double	angle_y = 0;
 	t_vec2di		current;
 	t_vec2di		relative;
 
 	current = vec2di(x, y);
-	relative = vec2di_sub(last, current);
+	relative = vec2di_sub(last, vec2di(x, y));
 	last = current;
-	
-	angle_y = (double)(relative.x) / 100;
-	angle_x = (double)(relative.y) / 100;
-	info->camera.yaw += -angle_y;
-	info->camera.pitch += -angle_x;
-	if (info->camera.pitch > 89.0f)
-		info->camera.pitch = 89.0f;
-	if (info->camera.pitch < -89.0f)
-		info->camera.pitch = -89.0f;
-	//t_vec3d forward = info->camera.look_dir;
-	//info->camera.pos = vec3d_add(&(info->camera.pos), &forward);
-	//info->camera.pitch = angle_x;
-	
-	//printf("mouse: %i, %i\n", x, y);
-	//printf("relative: %i, %i\n", relative.x, relative.y);
+	info->camera.yaw += -(relative.x / 100.0f);
 	image_clear(info->img);
 	mesh_draw(info->map, info->img, info->proj, &(info->camera), 0xFF34EBE5);
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.ptr, 0, 0);
