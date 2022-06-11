@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:21:27 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/10 21:07:59 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/11 13:29:15 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "matrix.h"
 # include "vec3d.h"
 # include "mlx_image.h"
+# include "camera.h"
 
 typedef struct s_edge
 {
@@ -40,5 +41,5 @@ t_edge	edge(size_t a, size_t b);
 t_mesh	*mesh_init(size_t vertices_size, t_vec3d *vertices, size_t edges_size, t_edge *edges);
 t_mesh	*mesh_init_cube(void);
 //void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, int rgb);
-void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, t_vec3d *camera_pos, t_vec3d *look_dir, int rgb);
+void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, t_camera *camera, int rgb);
 #endif

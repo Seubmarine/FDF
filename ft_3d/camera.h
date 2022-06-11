@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_type.h                                         :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 05:05:39 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 13:25:02 by tbousque         ###   ########.fr       */
+/*   Created: 2022/06/11 13:21:50 by tbousque          #+#    #+#             */
+/*   Updated: 2022/06/11 13:25:11 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_TYPE_H
-# define MLX_TYPE_H
-# include "mesh.h"
-# include "camera.h"
-typedef struct s_mlx_info
+#ifndef CAMERA_H
+# define CAMERA_H
+# include "vec3d.h"
+typedef struct s_camera 
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_mesh	*map;
-	t_mat4x4 proj;
-	t_camera camera;
-	t_img img;
-} t_mlx_info;
-
+	t_vec3d pos;
+	t_vec3d	look_dir;
+	float yaw;
+	float pitch;
+} t_camera;
 #endif
