@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 22:15:14 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/03 23:14:35 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/11 16:57:04 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	parse_vertices(char **lines, t_vec3d *vertices)
 		{
 			line = *lines + 1;
 			vertices[i].x = strtof(line, &line);
-			vertices[i].y = strtof(line, &line);
+			vertices[i].y = -strtof(line, &line);
 			vertices[i].z = strtof(line, &line);
 			i++;
 		}
