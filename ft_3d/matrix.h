@@ -19,6 +19,7 @@ typedef struct s_mat4x4
 	float m[4][4];
 } t_mat4x4;
 
+t_mat4x4	mat4x4_empty(void);
 t_mat4x4	mat4x4_identity(void);
 t_mat4x4    mat4x4_product(t_mat4x4 a, t_mat4x4 b);
 t_mat4x4    mat4x4_scale(float x, float y, float z);

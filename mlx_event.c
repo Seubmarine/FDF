@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:05:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 18:29:40 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/11 19:13:54 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	key_event(int keycode, t_mlx_info *info)
 	if (keycode == KEY_L)
 	 	load_new_file(info);
 	image_clear(info->img);
-	mesh_draw(info->map, info->img, get_projection_matrix(info->proj), &(info->camera), 0xFF34EBE5);
+	mesh_draw(info->map, info->img, get_projection_matrix(info->proj), &(info->camera));
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.ptr, 0, 0);
 	return (0);
 }
@@ -104,7 +104,7 @@ int	mouse_event(int x, int y, t_mlx_info *info)
 	last = current;
 	info->camera.yaw += -(relative.x / 100.0f);
 	image_clear(info->img);
-	mesh_draw(info->map, info->img, get_projection_matrix(info->proj), &(info->camera), 0xFF34EBE5);
+	mesh_draw(info->map, info->img, get_projection_matrix(info->proj), &(info->camera));
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.ptr, 0, 0);
 	return (0);
 }

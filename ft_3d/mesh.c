@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:39:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 16:48:17 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:46:45 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_mat4x4 get_view_mat(t_camera *camera)
 	return (view_matrix);
 }
 
-void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, t_camera *camera, int rgb)
+void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, t_camera *camera)
 {
 	size_t	i;
 	t_vec3d	vertex;
@@ -114,7 +114,7 @@ void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, t_camera *camera, int rgb
 		v2 = mesh->vertices_projected[current_edge.e[1]];
 		if (!((v1.x < 0 || v1.x > img.x) || (v1.y < 0 || v1.y > img.y) ||
 		(v2.x < 0 || v2.x > img.x) || (v2.y < 0 || v2.y > img.y) || (v1.z > 1.0 || v2.z > 1.0)))
-			image_draw_line(img, v1.x, v1.y, v2.x, v2.y, rgb);
+			image_draw_line(img, v1.x, v1.y, v2.x, v2.y, 0xFF45b566);
 		i++;
 	}
 }
