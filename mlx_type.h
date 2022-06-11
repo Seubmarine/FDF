@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 05:05:39 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 13:25:02 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:26:36 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 # define MLX_TYPE_H
 # include "mesh.h"
 # include "camera.h"
+
 typedef struct s_mlx_info
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_mesh	*map;
-	t_mat4x4 proj;
 	t_camera camera;
 	t_img img;
+	t_projection proj; 	
 } t_mlx_info;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:05:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 17:31:30 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:29:40 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	mlx_context_free(t_mlx_info *context)
 #define KEY_SPACE 32
 # define KEY_C 99
 # define KEY_Q 113
-# define MOVE_SPEED 0.2f;
-
+# define MOVE_SPEED 0.2f
+# define KEY_P 112
 static void key_move(int keycode, t_mlx_info *info)
 {
 	t_vec3d	dir;
@@ -74,6 +74,9 @@ static void key_move(int keycode, t_mlx_info *info)
 
 int	key_event(int keycode, t_mlx_info *info)
 {
+	printf("%d\n", keycode);
+	if (keycode == KEY_P)
+		switch_projection_mode(&(info->proj));
 	key_move(keycode, info);
 	if (keycode == 114)
 		image_clear(info->img);
@@ -85,7 +88,7 @@ int	key_event(int keycode, t_mlx_info *info)
 	if (keycode == KEY_L)
 	 	load_new_file(info);
 	image_clear(info->img);
-	mesh_draw(info->map, info->img, info->proj, &(info->camera), 0xFF34EBE5);
+	mesh_draw(info->map, info->img, get_projection_matrix(info->proj), &(info->camera), 0xFF34EBE5);
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.ptr, 0, 0);
 	return (0);
 }
@@ -101,7 +104,7 @@ int	mouse_event(int x, int y, t_mlx_info *info)
 	last = current;
 	info->camera.yaw += -(relative.x / 100.0f);
 	image_clear(info->img);
-	mesh_draw(info->map, info->img, info->proj, &(info->camera), 0xFF34EBE5);
+	mesh_draw(info->map, info->img, get_projection_matrix(info->proj), &(info->camera), 0xFF34EBE5);
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.ptr, 0, 0);
 	return (0);
 }
