@@ -14,18 +14,19 @@
 # define MATRIX_H
 # include <math.h>
 # include "vec3d.h"
+
 typedef struct s_mat4x4
 {
-	float m[4][4];
-} t_mat4x4;
+	float	m[4][4];
+}	t_mat4x4;
 
 t_mat4x4	mat4x4_empty(void);
 t_mat4x4	mat4x4_identity(void);
-t_mat4x4    mat4x4_product(t_mat4x4 a, t_mat4x4 b);
-t_mat4x4    mat4x4_scale(float x, float y, float z);
-t_mat4x4    mat4x4_rotate_y(float rad);
-t_mat4x4    mat4x4_rotate_x(float rad);
-t_mat4x4    mat4x4_pointat(t_vec3d *pos, t_vec3d *target, t_vec3d *up);
+t_mat4x4	mat4x4_product(t_mat4x4 a, t_mat4x4 b);
+t_mat4x4	mat4x4_scale(float x, float y, float z);
+t_mat4x4	mat4x4_rotate_y(float rad);
+t_mat4x4	mat4x4_rotate_x(float rad);
+t_mat4x4	mat4x4_pointat(t_vec3d *pos, t_vec3d *target, t_vec3d *up);
 t_mat4x4	mat4x4_lookat(t_mat4x4 *m);
 t_vec3d		vec3d_projected(t_vec3d i, t_mat4x4 m);
 

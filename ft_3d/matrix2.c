@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:24:31 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 19:25:25 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:12:31 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ t_mat4x4	mat4x4_lookat(t_mat4x4 *m)
 	matrix.m[3][2] = -(m->m[3][0] * matrix.m[0][2] + m->m[3][1] * \
 		matrix.m[1][2] + m->m[3][2] * matrix.m[2][2]);
 	matrix.m[3][3] = 1.0f;
-	return matrix;
+	return (matrix);
 }
 
-t_mat4x4    mat4x4_pointat(t_vec3d *pos, t_vec3d *target, t_vec3d *up)
+t_mat4x4	mat4x4_pointat(t_vec3d *pos, t_vec3d *target, t_vec3d *up)
 {
 	t_vec3d	newforward;
 	t_vec3d	a;

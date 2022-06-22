@@ -82,8 +82,6 @@ t_mat4x4	mat4x4_rotate_y(float rad)
 	const float	sin = sinf(rad);
 
 	m = mat4x4_empty();
-
-
 	m.m[0][0] = cos;
 	m.m[0][2] = -sin;
 	m.m[1][1] = 1.0f;
@@ -96,8 +94,8 @@ t_mat4x4	mat4x4_rotate_y(float rad)
 t_mat4x4	mat4x4_rotate_x(float rad)
 {
 	t_mat4x4	m;
-	const float cos = cosf(rad);
-	const float sin = sinf(rad);
+	const float	cos = cosf(rad);
+	const float	sin = sinf(rad);
 
 	m = mat4x4_empty();
 	m.m[0][0] = 1.0f;
