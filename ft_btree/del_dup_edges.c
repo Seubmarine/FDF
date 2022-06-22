@@ -43,17 +43,17 @@ void	edge_rm(t_edge *src, size_t *edges_size, t_edge *buffer)
 	*edges_size = j;
 }
 
+#include "ft_qsort.h"
 
-#include "stdlib.h"
-t_edge *remove_egdes_double(t_edge *edges, size_t *egdes_size)
+t_edge	*remove_egdes_double(t_edge *edges, size_t *egdes_size)
 {
-	t_edge *edges_buffer;
+	t_edge	*edges_buffer;
 
 	edges_buffer = malloc(sizeof(*edges_buffer) * *egdes_size);
 	if (edges_buffer == NULL)
 		return (NULL);
-	qsort(edges, *egdes_size, sizeof(*edges), cmp_x);
-	qsort(edges, *egdes_size, sizeof(*edges), cmp_y);
+	ft_qsort(edges, *egdes_size, sizeof(*edges), cmp_x);
+	ft_qsort(edges, *egdes_size, sizeof(*edges), cmp_y);
 	edge_rm(edges, egdes_size, edges_buffer);
 	free(edges_buffer);
 	return (edges);
