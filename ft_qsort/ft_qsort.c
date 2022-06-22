@@ -1,37 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_qsort.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/22 22:34:46 by tbousque          #+#    #+#             */
+/*   Updated: 2022/06/23 00:40:47 by tbousque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_qsort.h"
-
-char	*access(void *p, int index, int size)
-{
-	return (((char *)p)[index * size]);
-}
-
-void	ft_swap(void *a_ptr, void *b_ptr, size_t size)
-{
-	char	tmp;
-	size_t	i;
-	char	*a;
-	char	*b;
-
-	i = 0;
-	a = a_ptr;
-	b = b_ptr;
-	while (i < size)
-	{
-		tmp = a[i * size];
-		a[i * size] = b[i * size];
-		b[i * size] = tmp;
-		i++;
-	}
-}
 
 void	qswap(void *v, size_t left, size_t right, size_t type_size)
 {
-	char	*v_c = v;
 	char	tmp;
-	char	*a = v_c + left * type_size;
-	char	*b = v_c + right * type_size;
+	char	*a;
+	char	*b;
 	size_t	i;
 
+	a = (char *)v + left * type_size;
+	b = (char *)v + right * type_size;
 	i = 0;
 	while (i < type_size)
 	{
@@ -42,45 +31,36 @@ void	qswap(void *v, size_t left, size_t right, size_t type_size)
 	}
 }
 
-void	qsort(void *v, long left, long right, size_t type_size, int (*comp)(void *, void *)) {
+void	_ft_qsort(void *v, size_t left, size_t right, struct s_qsort_args args)
+{
 	size_t	i;
 	size_t	last;
 
 	if (left >= right)
 		return ;
-	qswap(v, left, (left + right)/2, type_size);
+	qswap(v, left, (left + right) / 2, args.type_size);
 	last = left;
-	for (i = left + 1; i <= right; i++)
-		if ((*comp)((char *)v + i * type_size, (char *)v + left * type_size) < 0) /* Here's the function call */
-			qswap(v, ++last, i, type_size);
-	qswap(v, left, last, type_size);
-	qsort(v, left, last-1, type_size, comp);
-	qsort(v, last+1, right, type_size, comp);
-}
-
-int	cmp(void *a, void *b)
-{
-	const int	ai = (int) a;
-	const int	bi = (int) b;
-
-	return (ai - bi);
+	i = left + 1;
+	while (i <= right)
+	{
+		if (args.compar((char *)v + i * args.type_size, \
+			(char *)v + left * args.type_size) < 0)
+			qswap(v, ++last, i, args.type_size);
+		i++;
+	}
+	qswap(v, left, last, args.type_size);
+	if (last - 1 < last)
+		_ft_qsort(v, left, last - 1, args);
+	if (last + 1 > last)
+		_ft_qsort(v, last + 1, right, args);
 }
 
 void	ft_qsort(void *base, size_t nmemb, size_t size,
 			int (*compar)(const void *, const void *))
 {
-	qsort(base, 0, nmemb - 1, size, compar);
+	struct s_qsort_args	args;
+
+	args.type_size = size;
+	args.compar = compar;
+	_ft_qsort(base, 0, nmemb - 1, args);
 }
-
-// int main(void)
-// {
-// 	int		tab[] = {5, 4, 3, 42, 0, 7, -2847, 2, 1, -1, 42, 55};
-// 	const size_t	tab_size = sizeof(tab) / sizeof(tab[0]);
-// 	ft_qsort(tab, tab_size, sizeof(tab[0]), &cmp);
-
-// 	for (size_t i = 0; i < tab_size; i++)
-// 	{
-// 		printf("%i ", tab[i]);
-// 	}
-// 	printf("\n");
-// }

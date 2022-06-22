@@ -2,7 +2,7 @@ NAME = fdf
 
 CC = gcc
 
-CFLAGS = -g3  #-Wall -Werror -Wextra
+CFLAGS = -g3  -Wall -Werror -Wextra
 
 SRCS = fdf_init.c draw.c mlx_event.c $(wildcard parser/*.c) $(wildcard ft_3d/*.c) $(wildcard ft_btree/*.c) $(wildcard ft_qsort/*.c)
 
