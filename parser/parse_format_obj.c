@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 22:15:14 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 16:57:04 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:52:42 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ t_mesh	*parse_format_obj(char **lines)
 	}
 	parse_vertices(lines, vertices);
 	parse_edges(lines, edges);
-	remove_egdes_double(edges, &edges_size);
+	remove_edges_double(edges, &edges_size);
 	mesh = mesh_init(vertices_size, vertices, edges_size, edges);
 	free(vertices);
 	free(edges);

@@ -1,29 +1,31 @@
 
-#include "del_dup_egdes.h"
+#include "del_dup_edges.h"
 
-int cmp_x(const void *i1, const void *i2)
+int	cmp_x(const void *i1, const void *i2)
 {
-	t_edge ei1 = *(t_edge *)i1;
-	t_edge ei2 = *(t_edge *)i2;
+	const t_edge	ei1 = *(t_edge *)i1;
+	const t_edge	ei2 = *(t_edge *)i2;
+
 	return (ei1.e[0] - ei2.e[0]);
 }
 
-int cmp_y(const void *i1, const void *i2)
+int	cmp_y(const void *i1, const void *i2)
 {
-	t_edge ei1 = *(t_edge *)i1;
-	t_edge ei2 = *(t_edge *)i2;
+	const t_edge	ei1 = *(t_edge *)i1;
+	const t_edge	ei2 = *(t_edge *)i2;
+
 	return (ei1.e[1] - ei2.e[1]);
 }
 
-int compare(t_edge a, t_edge b)
+int	compare(t_edge a, t_edge b)
 {
 	return (a.e[0] == b.e[0] && a.e[1] == b.e[1]);
 }
 
 void	edge_rm(t_edge *src, size_t *edges_size, t_edge *buffer)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;
@@ -43,9 +45,7 @@ void	edge_rm(t_edge *src, size_t *edges_size, t_edge *buffer)
 	*edges_size = j;
 }
 
-#include "ft_qsort.h"
-
-t_edge	*remove_egdes_double(t_edge *edges, size_t *egdes_size)
+t_edge	*remove_edges_double(t_edge *edges, size_t *egdes_size)
 {
 	t_edge	*edges_buffer;
 

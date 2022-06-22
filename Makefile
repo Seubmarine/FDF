@@ -4,7 +4,7 @@ CC = gcc
 
 CFLAGS = -g3  -Wall -Werror -Wextra
 
-SRCS = fdf_init.c draw.c mlx_event.c $(wildcard parser/*.c) $(wildcard ft_3d/*.c) $(wildcard ft_btree/*.c) $(wildcard ft_qsort/*.c)
+SRCS = fdf_init.c draw.c mlx_event.c $(wildcard parser/*.c) $(wildcard ft_3d/*.c) $(wildcard del_dup_edges/*.c) $(wildcard ft_qsort/*.c)
 
 OBJS = $(SRCS:.c=.o)
 
@@ -15,7 +15,7 @@ MLX = minilibx-linux/libmlx.a
 #LIBS = -L minilibx-linux/ -lmlx -lXext -lX11 -L ft_3d/ -lft_3d -L libft/ -lft -lm
 LIBS = -L minilibx-linux/ -lmlx -lXext -lX11 -L libft/ -lft -lm
 
-INCLUDES = -I . -I minilibx-linux/ -I libft/includes -I ft_3d/ -I parser/ -I ft_btree/ -I ft_qsort
+INCLUDES = -I . -I minilibx-linux/ -I libft/includes -I ft_qsort/ -I del_dup_edges/ -I ft_3d/ -I parser/
 
 .PHONY: all clean fclean re
 

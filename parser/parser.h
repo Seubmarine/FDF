@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 02:27:10 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/04 06:45:24 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:50:27 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include "libft.h"
 # include "mesh.h"
-# include "del_dup_egdes.h"
+# include "del_dup_edges.h"
 # include <stdio.h>
 
 char	**get_lines_of_file(char *str);
