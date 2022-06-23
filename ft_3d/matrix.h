@@ -29,6 +29,7 @@ t_mat4x4	mat4x4_rotate_x(float rad);
 t_mat4x4	mat4x4_pointat(t_vec3d *pos, t_vec3d *target, t_vec3d *up);
 t_mat4x4	mat4x4_lookat(t_mat4x4 *m);
 t_vec3d		vec3d_projected(t_vec3d i, t_mat4x4 m);
+t_mat4x4	mat4x4_translate(float x, float y, float z);
 
 //void		mat4x4_printf(t_mat4x4 m);
 #endif

@@ -106,25 +106,3 @@ t_mat4x4	mat4x4_rotate_x(float rad)
 	m.m[3][3] = 1.0f;
 	return (m);
 }
-
-/*
-void mat4x4_printf(t_mat4x4 m)
-{
-	int x;
-	int y;
-
-	y = 0;
-	while (y < 4)
-	{
-		x = 0;
-		while (x < 4)
-		{
-			printf("%.0f,",m.elem[y][x]);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-	printf("\n");
-}
-*/

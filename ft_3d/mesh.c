@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:39:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 19:40:40 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 23:50:59 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,43 +63,16 @@ t_mesh	*mesh_init_cube(void)
 	return (mesh);
 }
 
-double	to_rad(double degree)
-{
-	return (degree * (3.14159f / 180.0));
-}
-
-t_mat4x4	get_view_mat(t_camera *camera)
-{
-	t_vec3d		up;
-	t_vec3d		target;
-	t_mat4x4	camrot;
-	t_mat4x4	camera_matrix;
-	t_mat4x4	view_matrix;
-
-	up = (t_vec3d){0, 1, 0};
-	target = (t_vec3d){0, 0, 1};
-	camrot = mat4x4_rotate_y(camera->yaw);
-	camera->look_dir = vec3d_projected(target, camrot);
-	target = vec3d_add(&(camera->pos), &(camera->look_dir));
-	camera_matrix = mat4x4_pointat(&(camera->pos), &target, &up);
-	view_matrix = mat4x4_lookat(&camera_matrix);
-	return (view_matrix);
-}
-
-void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, t_camera *camera)
+void	mesh_project(t_mesh *mesh, t_img img, t_mat4x4 proj)
 {
 	size_t	i;
 	t_vec3d	vertex;
-	t_edge	current_edge;
-	t_vec3d	v1;
-	t_vec3d	v2;
 
 	i = 0;
 	while (i < mesh->vertices_size)
 	{
 		vertex = mesh->vertices[i];
-		vertex = vec3d_projected(vertex, mat4x4_product(\
-			get_view_mat(camera), proj));
+		vertex = vec3d_projected(vertex, proj);
 		vertex.x += 1.0f;
 		vertex.y += 1.0f;
 		vertex.x *= 0.5f * img.x;
@@ -107,6 +80,15 @@ void	mesh_draw(t_mesh *mesh, t_img img, t_mat4x4 proj, t_camera *camera)
 		mesh->vertices_projected[i] = vertex;
 		i++;
 	}
+}
+
+void	mesh_draw(t_mesh *mesh, t_img img)
+{
+	size_t	i;
+	t_edge	current_edge;
+	t_vec3d	v1;
+	t_vec3d	v2;
+
 	i = 0;
 	while (i < mesh->edges_size)
 	{

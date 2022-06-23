@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 13:21:50 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 18:51:08 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 21:37:26 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CAMERA_H
 # include "vec3d.h"
 # include "matrix.h"
+# include "radian.h"
 
 enum e_proj_mode {
 	mode_perspective,
@@ -32,12 +33,13 @@ typedef struct s_projection
 {
 	enum e_proj_mode	mode;
 	t_mat4x4			perspective;
-	t_mat4x4			paralel;
+	t_mat4x4			isometric;
 }	t_projection;
 
 t_mat4x4		get_projection_matrix(t_projection container);
 t_projection	set_all_proj(float near, float far, float fov,
 					float aspect_ratio);
 void			switch_projection_mode(t_projection *p);
+t_mat4x4		get_view_mat(t_camera *camera);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 18:01:23 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/23 01:15:22 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 21:02:29 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-t_mat4x4	set_projection_matrix(float near, float far, float fov,
+t_mat4x4	set_perspective_matrix(float near, float far, float fov,
 					float aspect_ratio)
 {
 	const float	fovrad = 1.0f / tanf(fov * 0.5f / 180.0f * 3.14159f);
@@ -28,27 +28,22 @@ t_mat4x4	set_projection_matrix(float near, float far, float fov,
 	return (proj);
 }
 
-t_mat4x4	set_paralel_matrix(float right, float left, float top,
-				float bottom, float far, float near)
+t_mat4x4	set_isometric_matrix(void)
 {
-	t_mat4x4	m;
+	t_mat4x4	rot;
 
-	m = mat4x4_empty();
-	m.m[0][0] = 2 / (right - left);
-	m.m[1][1] = 2 / (top - bottom);
-	m.m[2][2] = -2 / (far - near);
-	m.m[3][3] = 1;
-	m.m[0][3] = -(right + left) / (right - left);
-	m.m[1][3] = -(top + bottom) / (top - bottom);
-	m.m[2][3] = -(far + near) / (far - near);
-	return (m);
+	rot = mat4x4_product(
+			mat4x4_rotate_x(to_rad(35.264)), \
+			mat4x4_rotate_y(to_rad(45))
+			);
+	return (rot);
 }
 
 t_mat4x4	get_projection_matrix(t_projection container)
 {
 	if (container.mode == mode_perspective)
 		return (container.perspective);
-	return (container.paralel);
+	return (container.isometric);
 }
 
 t_projection	set_all_proj(float near, float far, float fov,
@@ -56,8 +51,8 @@ t_projection	set_all_proj(float near, float far, float fov,
 {
 	t_projection	p;
 
-	p.perspective = set_projection_matrix(near, far, fov, aspect_ratio);
-	p.paralel = set_paralel_matrix(30, -30, 30, -30, 30, -30);
+	p.perspective = set_perspective_matrix(near, far, fov, aspect_ratio);
+	p.isometric = set_isometric_matrix();
 	p.mode = mode_perspective;
 	return (p);
 }

@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:07:22 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/23 13:41:32 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 21:03:49 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include "vec2di.h"
 # include "parser.h"
 # define KEY_L 108
-#define KEY_W 119
-#define KEY_D 100
-#define KEY_S 115
-#define KEY_A 97
-#define KEY_SPACE 32
+# define KEY_W 119
+# define KEY_D 100
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_SPACE 32
 # define KEY_C 99
 # define KEY_Q 113
 # define KEY_P 112
