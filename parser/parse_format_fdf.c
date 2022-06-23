@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:43:43 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/23 01:24:15 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 19:10:13 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ t_mesh	*parse_format_fdf(char **lines)
 	t_edge	*edges;
 	t_vec3d	*vertices;
 	t_mesh	*mesh;
-	size_t	vertices_size = line_count * word_per_line;
 
 	if(!get_lines_word_count(lines, &word_per_line, &line_count))
 		return (NULL);
+	size_t	vertices_size = line_count * word_per_line;
 	vertices = malloc(sizeof(*vertices) * vertices_size);
 	if (vertices == NULL)
 		return (NULL);

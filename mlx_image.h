@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 05:12:18 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/23 13:40:55 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 19:09:24 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include "mlx.h"
 # include "vec2di.h"
+# include "libft.h"
 
 typedef struct s_img
 {
