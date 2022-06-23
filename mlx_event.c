@@ -6,18 +6,18 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:05:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/11 19:13:54 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:42:35 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_event.h"
 
-static void load_new_file(t_mlx_info *info)
+static void	load_new_file(t_mlx_info *info)
 {
-	static char file_to_load[255] = "";
-	ssize_t end;
-	t_mesh *new_mesh;
-	
+	static char	file_to_load[255] = "";
+	ssize_t		end;
+	t_mesh		*new_mesh;
+
 	end = read(STDIN_FILENO, file_to_load, 255);
 	file_to_load[end] = '\0';
 	if (end >= 1 && file_to_load[end - 1] == '\n')
@@ -41,27 +41,17 @@ int	mlx_context_free(t_mlx_info *context)
 	return (0);
 }
 
-
-#define KEY_W 119
-#define KEY_D 100
-#define KEY_S 115
-#define KEY_A 97
-#define KEY_SPACE 32
-# define KEY_C 99
-# define KEY_Q 113
-# define MOVE_SPEED 0.2f
-# define KEY_P 112
-static void key_move(int keycode, t_mlx_info *info)
+static void	key_move(int keycode, t_mlx_info *info)
 {
 	t_vec3d	dir;
-	
+
 	dir = vec3d(0, 0, 0);
 	if (keycode == KEY_D)
 		dir.x += MOVE_SPEED;
 	if (keycode == KEY_A)
 		dir.x -= MOVE_SPEED;
 	if (keycode == KEY_W)
-		dir.z += MOVE_SPEED; 
+		dir.z += MOVE_SPEED;
 	if (keycode == KEY_S)
 		dir.z -= MOVE_SPEED;
 	if (keycode == KEY_SPACE)
@@ -86,9 +76,10 @@ int	key_event(int keycode, t_mlx_info *info)
 		exit(0);
 	}
 	if (keycode == KEY_L)
-	 	load_new_file(info);
+		load_new_file(info);
 	image_clear(info->img);
-	mesh_draw(info->map, info->img, get_projection_matrix(info->proj), &(info->camera));
+	mesh_draw(info->map, info->img, \
+		get_projection_matrix(info->proj), &(info->camera));
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.ptr, 0, 0);
 	return (0);
 }
@@ -104,7 +95,8 @@ int	mouse_event(int x, int y, t_mlx_info *info)
 	last = current;
 	info->camera.yaw += -(relative.x / 100.0f);
 	image_clear(info->img);
-	mesh_draw(info->map, info->img, get_projection_matrix(info->proj), &(info->camera));
+	mesh_draw(info->map, info->img, \
+		get_projection_matrix(info->proj), &(info->camera));
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.ptr, 0, 0);
 	return (0);
 }

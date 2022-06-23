@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 05:12:18 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/04 05:50:32 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:40:55 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
-	int x;
-	int y;
+	int		x;
+	int		y;
 }	t_img;
 
 void	image_put_pixel(t_img img, int x, int y, unsigned int rgb);

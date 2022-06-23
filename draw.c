@@ -29,15 +29,14 @@ void image_put_pixel(t_img img, int x, int y, unsigned int rgb)
 // 	image_draw_line(img, a.x, a.y, b.x, b.y);
 // }
 
-#include <string.h>
 void	image_clear(t_img img)
 {
-	memset(img.buffer, 0, img.x * sizeof(unsigned int) * img.y);
+	ft_memset(img.buffer, 0, img.x * sizeof(unsigned int) * img.y);
 }
 
-unsigned int rgb(char alpha, char red, char green, char blue)
+unsigned int	rgb(char alpha, char red, char green, char blue)
 {
-	return (alpha << 24 | red << 16 | green  << 8 | blue);
+	return (alpha << 24 | red << 16 | green << 8 | blue);
 }
 
 void	scan_line(t_img img, int x1, int x2, int y)

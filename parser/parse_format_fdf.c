@@ -6,15 +6,16 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:43:43 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/04 09:40:31 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:24:15 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int get_lines_word_count(char **lines, size_t *word_per_line, size_t *line_count)
+int	get_lines_word_count(char **lines, size_t *word_per_line,
+	size_t *line_count)
 {
-	size_t last_line_i;
+	size_t	last_line_i;
 
 	last_line_i = 0;
 	while (lines[last_line_i])
@@ -33,17 +34,15 @@ int get_lines_word_count(char **lines, size_t *word_per_line, size_t *line_count
 			return (0);
 		(*line_count)++;
 	}
-	//(*line_count)++;
 	return (1);
 }
 
-void	parse_vertices(char **lines, t_vec3d *vertices, size_t vertices_size)
+void	parse_vertices(char **lines, t_vec3d *vertices)
 {
-	(void) vertices_size;
-	char *line;
-	size_t i;
-	size_t x;
-	size_t y;
+	char	*line;
+	size_t	i;
+	size_t	x;
+	size_t	y;
 
 	i = 0;
 	y = 0;
@@ -102,16 +101,15 @@ void	parse_edges_fdf(t_edge *edges, size_t num_per_line, size_t line_count)
 
 t_mesh	*parse_format_fdf(char **lines)
 {
-	size_t word_per_line;
-	size_t line_count;
-	t_edge *edges;
-	t_vec3d *vertices;
-	t_mesh *mesh;
-	// word_per_line = 0;
-	// line_count = 0;
+	size_t	word_per_line;
+	size_t	line_count;
+	t_edge	*edges;
+	t_vec3d	*vertices;
+	t_mesh	*mesh;
+	size_t	vertices_size = line_count * word_per_line;
+
 	if(!get_lines_word_count(lines, &word_per_line, &line_count))
 		return (NULL);
-	size_t vertices_size = line_count * word_per_line;
 	vertices = malloc(sizeof(*vertices) * vertices_size);
 	if (vertices == NULL)
 		return (NULL);
@@ -123,7 +121,7 @@ t_mesh	*parse_format_fdf(char **lines)
 		return (NULL);
 	}
 	ft_memset(edges, 0, sizeof(*edges) * edges_size);
-	parse_vertices(lines, vertices, vertices_size);
+	parse_vertices(lines, vertices);
 	parse_edges_fdf(edges, word_per_line, line_count);
 	mesh = mesh_init(vertices_size, vertices, edges_size, edges);
 	if (mesh == NULL)
@@ -132,16 +130,3 @@ t_mesh	*parse_format_fdf(char **lines)
 	free(edges);
 	return (mesh);
 }
-
-	// size_t x = word_per_line;
-	// size_t y = line_count;
-	// printf("edges size = %lu", ((x-1) * y) + ((y - 1) * x));
-
-// 4*3  ((4-1) * 3) + ((3 - 1) * 4) 
-// x*y  ((x-1) * y) + ((y - 1) * x) 
-
-// 1 - 1 - 1 - 1
-// -   -   -   -
-// 1 - 1 - 1 - 1
-// -   -   -   -
-// 1 - 1 - 1 - 1
