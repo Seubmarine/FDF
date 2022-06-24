@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 13:21:50 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/23 21:37:26 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/24 18:03:30 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_camera
 	t_vec3d	pos;
 	t_vec3d	look_dir;
 	float	yaw;
-	float	pitch;
 }	t_camera;
 
 typedef struct s_projection
