@@ -63,18 +63,6 @@ t_mat4x4	mat4x4_product(t_mat4x4 a, t_mat4x4 b)
 	return (new);
 }
 
-t_mat4x4	mat4x4_scale(float x, float y, float z)
-{
-	t_mat4x4	m;
-
-	m = mat4x4_empty();
-	m.m[0][0] = x;
-	m.m[1][1] = y;
-	m.m[2][2] = z;
-	m.m[3][3] = 1;
-	return (m);
-}
-
 t_mat4x4	mat4x4_rotate_y(float rad)
 {
 	t_mat4x4	m;
