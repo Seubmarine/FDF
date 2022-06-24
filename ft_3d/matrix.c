@@ -83,9 +83,9 @@ t_mat4x4	mat4x4_rotate_y(float rad)
 
 	m = mat4x4_empty();
 	m.m[0][0] = cos;
-	m.m[0][2] = -sin;
+	m.m[0][2] = sin;
 	m.m[1][1] = 1.0f;
-	m.m[2][0] = sin;
+	m.m[2][0] = -sin;
 	m.m[2][2] = cos;
 	m.m[3][3] = 1.0f;
 	return (m);
@@ -103,6 +103,22 @@ t_mat4x4	mat4x4_rotate_x(float rad)
 	m.m[1][2] = -sin;
 	m.m[2][1] = sin;
 	m.m[2][2] = cos;
+	m.m[3][3] = 1.0f;
+	return (m);
+}
+
+t_mat4x4	mat4x4_rotate_z(float rad)
+{
+	t_mat4x4	m;
+	const float	cos = cosf(rad);
+	const float	sin = sinf(rad);
+
+	m = mat4x4_empty();
+	m.m[0][0] = cos;
+	m.m[0][1] = -sin;
+	m.m[1][0] = sin;
+	m.m[1][1] = cos;
+	m.m[2][2] = 1.0f;
 	m.m[3][3] = 1.0f;
 	return (m);
 }

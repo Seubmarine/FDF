@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:05:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/24 13:37:37 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:35:48 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	mouse_event(int x, int y, t_mlx_info *info)
 	current = vec2di(x, y);
 	relative = vec2di_sub(last, vec2di(x, y));
 	last = current;
-	info->camera.yaw += -(relative.x / 100.0f);
+	info->camera.yaw += (relative.x / 100.0f);
 	image_clear(info->img);
 	if (info->proj.mode == mode_perspective)
 	{

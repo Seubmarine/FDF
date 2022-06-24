@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 18:01:23 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/23 21:02:29 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/24 13:52:51 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_mat4x4	set_isometric_matrix(void)
 	t_mat4x4	rot;
 
 	rot = mat4x4_product(
-			mat4x4_rotate_x(to_rad(35.264)), \
+			mat4x4_rotate_z(to_rad(-35)), \
 			mat4x4_rotate_y(to_rad(45))
 			);
 	return (rot);
