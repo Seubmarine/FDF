@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 08:14:04 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/04 05:59:02 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/24 18:05:56 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # if DEBUG
 #  include<stdio.h>
 # endif
-# define SCREEN_X 1280
-# define SCREEN_Y 652
+# define SCREEN_X 1080
+# define SCREEN_Y 720
 
 unsigned int	rgb(char t, char r, char g, char b);
 #endif

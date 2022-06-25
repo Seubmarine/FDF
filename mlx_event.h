@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:07:22 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/23 21:03:49 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/24 18:07:10 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define KEY_Q 113
 # define KEY_P 112
 # define MOVE_SPEED 0.2f
+# define ISO_MOVE_SPEED 1000
 
 int		key_event(int keycode, t_mlx_info *info);
 int		mouse_event(int x, int y, t_mlx_info *info);

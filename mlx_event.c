@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:05:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/24 17:35:48 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/24 18:07:37 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static t_vec3d	key_move(int keycode, t_mlx_info *info)
 	return (dir);
 }
 
-#define ISO_MOVE_SPEED 1000
 static void	isometric_movement(t_mesh *mesh, t_vec3d	dir)
 {
 	size_t			i;
@@ -80,8 +79,8 @@ static void	isometric_movement(t_mesh *mesh, t_vec3d	dir)
 	{
 		v = mesh->vertices_projected[i];
 		v.z = 0;
-		v.x -=  all_dir.x * ISO_MOVE_SPEED;
-		v.y +=  all_dir.z * ISO_MOVE_SPEED;
+		v.x -= all_dir.x * ISO_MOVE_SPEED;
+		v.y += all_dir.z * ISO_MOVE_SPEED;
 		if (scale != 0)
 		{
 			v.x *= scale;
@@ -112,7 +111,7 @@ int	key_event(int keycode, t_mlx_info *info)
 	{
 		mesh_project(info->map, info->img, \
 		mat4x4_product(\
-			get_view_mat(&(info->camera)),\
+			get_view_mat(&(info->camera)), \
 			get_projection_matrix(info->proj)));
 	}
 	else

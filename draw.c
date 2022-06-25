@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/24 17:52:16 by tbousque          #+#    #+#             */
+/*   Updated: 2022/06/25 17:30:18 by tbousque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mlx_image.h"
 
 t_img	image_create(void *mlx_ptr, int size_x, int size_y)
@@ -5,29 +17,17 @@ t_img	image_create(void *mlx_ptr, int size_x, int size_y)
 	t_img	img;
 
 	img.ptr = mlx_new_image(mlx_ptr, size_x, size_y);
-	img.buffer = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.size_line, &img.endian);
+	img.buffer = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, \
+		&img.size_line, &img.endian);
 	img.x = size_x;
 	img.y = size_y;
 	return (img);
 }
 
-void image_put_pixel(t_img img, int x, int y, unsigned int rgb)
+void	image_put_pixel(t_img img, int x, int y, unsigned int rgb)
 {
 	((unsigned int *)img.buffer)[y * img.x + x] = rgb;
 }
-
-//wireframe triangle
-// void image_put_triangle(t_img img, t_vec2di a, t_vec2di b, t_vec2di c)
-// {
-// 	image_draw_line(img, a.x, a.y, b.x, b.y);
-// 	image_draw_line(img, b.x, b.y, c.x, c.y);
-// 	image_draw_line(img, c.x, c.y, a.x, a.y);
-// }
-
-// void image_draw_line_from_vec2di(t_img img, t_vec2di a, t_vec2di b)
-// {
-// 	image_draw_line(img, a.x, a.y, b.x, b.y);
-// }
 
 void	image_clear(t_img img)
 {
@@ -47,21 +47,22 @@ void	scan_line(t_img img, int x1, int x2, int y)
 		x1++;
 	}
 }
-/*
-//Bresenham algorithm
-void	image_draw_line(t_img img, int x0, int y0, int x1, int y1) {
+
+
+//Bresenham algorithm 
+void	image_draw_line(t_img img, int x0, int y0, int x1, int y1, int rgb) {
 
 	int	dx = abs(x1-x0), sx = x0 < x1 ? 1 : -1;
 	int	dy = abs(y1-y0), sy = y0 < y1 ? 1 : -1; 
 	int	err = (dx > dy ? dx : -dy) / 2, e2;
 
-	while(1)
+	while (1)
 	{
-		image_put_pixel(img, x0, y0, 0xFF34EBE5);
-		if (x0==x1 && y0==y1)
-			break;
+		image_put_pixel(img, x0, y0, rgb);
+		if (x0 == x1 && y0 == y1)
+			break ;
 		e2 = err;
-		if (e2 >-dx)
+		if (e2 > -dx)
 		{
 			err -= dy;
 			x0 += sx;
@@ -73,54 +74,53 @@ void	image_draw_line(t_img img, int x0, int y0, int x1, int y1) {
 		}
 	}
 }
-*/
 
 //0xFF34EBE5
 
-#include <stdbool.h>
-void image_draw_line(t_img surface, int x, int y, int x2, int y2, int rgb) {
-   	bool yLonger=false;
-	int shortLen=y2-y;
-	int longLen=x2-x;
-	if (abs(shortLen)>abs(longLen)) {
-		int swap=shortLen;
-		shortLen=longLen;
-		longLen=swap;				
-		yLonger=true;
-	}
-	int decInc;
-	if (longLen==0) decInc=0;
-	else decInc = (shortLen << 16) / longLen;
+// #include <stdbool.h>
+// void image_draw_line(t_img surface, int x, int y, int x2, int y2, int rgb) {
+//    	bool yLonger=false;
+// 	int shortLen=y2-y;
+// 	int longLen=x2-x;
+// 	if (abs(shortLen)>abs(longLen)) {
+// 		int swap=shortLen;
+// 		shortLen=longLen;
+// 		longLen=swap;				
+// 		yLonger=true;
+// 	}
+// 	int decInc;
+// 	if (longLen==0) decInc=0;
+// 	else decInc = (shortLen << 16) / longLen;
 
-	if (yLonger) {
-		if (longLen>0) {
-			longLen+=y;
-			for (int j=0x8000+(x<<16);y<=longLen;++y) {
-				image_put_pixel(surface,j >> 16,y, rgb);	
-				j+=decInc;
-			}
-			return;
-		}
-		longLen+=y;
-		for (int j=0x8000+(x<<16);y>=longLen;--y) {
-			image_put_pixel(surface,j >> 16,y, rgb);	
-			j-=decInc;
-		}
-		return;	
-	}
+// 	if (yLonger) {
+// 		if (longLen>0) {
+// 			longLen+=y;
+// 			for (int j=0x8000+(x<<16);y<=longLen;++y) {
+// 				image_put_pixel(surface,j >> 16,y, rgb);	
+// 				j+=decInc;
+// 			}
+// 			return;
+// 		}
+// 		longLen+=y;
+// 		for (int j=0x8000+(x<<16);y>=longLen;--y) {
+// 			image_put_pixel(surface,j >> 16,y, rgb);	
+// 			j-=decInc;
+// 		}
+// 		return;	
+// 	}
 
-	if (longLen>0) {
-		longLen+=x;
-		for (int j=0x8000+(y<<16);x<=longLen;++x) {
-			image_put_pixel(surface,x,j >> 16, rgb);
-			j+=decInc;
-		}
-		return;
-	}
-	longLen+=x;
-	for (int j=0x8000+(y<<16);x>=longLen;--x) {
-		image_put_pixel(surface,x,j >> 16, rgb);
-		j-=decInc;
-	}
+// 	if (longLen>0) {
+// 		longLen+=x;
+// 		for (int j=0x8000+(y<<16);x<=longLen;++x) {
+// 			image_put_pixel(surface,x,j >> 16, rgb);
+// 			j+=decInc;
+// 		}
+// 		return;
+// 	}
+// 	longLen+=x;
+// 	for (int j=0x8000+(y<<16);x>=longLen;--x) {
+// 		image_put_pixel(surface,x,j >> 16, rgb);
+// 		j-=decInc;
+// 	}
 
-}
+// }
