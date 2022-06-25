@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 06:39:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/23 23:50:59 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/25 19:24:59 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ size_t edges_size, t_edge *edges)
 	mesh->edges = (t_edge *)((char *)mesh + sizeof(*mesh));
 	mesh->vertices = (t_vec3d *)(&mesh->edges[edges_size]);
 	mesh->vertices_projected = (t_vec3d *)(&mesh->vertices[vertices_size]);
-	memcpy(mesh->edges, edges, sizeof(*edges) * edges_size);
-	memcpy(mesh->vertices, vertices, sizeof(*vertices) * vertices_size);
+	ft_memcpy(mesh->edges, edges, sizeof(*edges) * edges_size);
+	ft_memcpy(mesh->vertices, vertices, sizeof(*vertices) * vertices_size);
 	return (mesh);
 }
 
@@ -98,7 +98,7 @@ void	mesh_draw(t_mesh *mesh, t_img img)
 		if (!((v1.x < 0 || v1.x > img.x) || (v1.y < 0 || v1.y > img.y) || \
 			(v2.x < 0 || v2.x > img.x) || (v2.y < 0 || v2.y > img.y) \
 			|| (v1.z > 1.0 || v2.z > 1.0)))
-			image_draw_line(img, v1.x, v1.y, v2.x, v2.y, 0xFF45b566);
+			image_draw_line(img, vec2di(v1.x, v1.y), vec2di(v2.x, v2.y));
 		i++;
 	}
 }

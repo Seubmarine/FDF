@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:52:16 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/25 17:30:18 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/25 19:22:00 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,32 @@ unsigned int	rgb(char alpha, char red, char green, char blue)
 	return (alpha << 24 | red << 16 | green << 8 | blue);
 }
 
-void	scan_line(t_img img, int x1, int x2, int y)
+void	image_draw_line(t_img img, t_vec2di a, t_vec2di b)
 {
-	while (x1 < x2)
+	int	dx = abs(b.x - a.x), sx = a.x < b.x ? 1 : -1;
+	int	dy = abs(b.y - a.y), sy = a.y < b.y ? 1 : -1; 
+	int	err = (dx > dy ? dx : -dy) / 2, e2;
+
+	while (1)
 	{
-		image_put_pixel(img, x1, y, 0xFF34EBE5);
-		x1++;
+		image_put_pixel(img, a.x, a.y, 0xFF34EBE5);
+		if (a.x == b.x && a.y == b.y)
+			break ;
+		e2 = err;
+		if (e2 > -dx)
+		{
+			err -= dy;
+			a.x += sx;
+		}
+		if (e2 < dy)
+		{
+			err += dx;
+			a.y += sy;
+		}
 	}
 }
 
-
+/*
 //Bresenham algorithm 
 void	image_draw_line(t_img img, int x0, int y0, int x1, int y1, int rgb) {
 
@@ -74,7 +90,7 @@ void	image_draw_line(t_img img, int x0, int y0, int x1, int y1, int rgb) {
 		}
 	}
 }
-
+*/
 //0xFF34EBE5
 
 // #include <stdbool.h>
