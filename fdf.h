@@ -12,19 +12,16 @@
 
 #ifndef FDF_H
 # define FDF_H
+# include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include "mlx.h"
 # include "mlx_type.h"
 # include "get_next_line.h"
 # include "ft_3d.h"
-# include <stddef.h>
-# include <stdlib.h>
 # include "mlx_event.h"
 # include "mlx_image.h"
 # include "parser.h"
-# define DEBUG 1
-# if DEBUG
-#  include<stdio.h>
-# endif
 # define SCREEN_X 1080
 # define SCREEN_Y 720
 #endif

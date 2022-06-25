@@ -14,7 +14,6 @@
 # define MESH_H
 # include <stddef.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include "libft.h"
 # include "string.h"
 # include "matrix.h"

@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 	{
-		printf("No file provided\n");
+		ft_putstr_fd("No file provided\n", 1);
 		return (EXIT_FAILURE);
 	}
 	mlx.map = parse_file_to_mesh(argv[1]);

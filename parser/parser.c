@@ -42,14 +42,14 @@ char	**get_file_lines(char *filename)
 	m_file = get_file_str(filename);
 	if (m_file == NULL)
 	{
-		write(STDOUT_FILENO, "Error opening file\n", 19);
+		ft_putstr_fd("Error opening file\n", STDOUT_FILENO);
 		return (NULL);
 	}
 	lines = get_lines_of_file(m_file);
 	if (!lines)
 	{
 		free(m_file);
-		write(STDOUT_FILENO, "Error when transforming files in lines", 38);
+		ft_putstr_fd("Error when transforming files in lines", STDOUT_FILENO);
 		return (NULL);
 	}
 	return (lines);
@@ -86,7 +86,7 @@ t_mesh	*parse_file_to_mesh(char *filename)
 	format = get_file_format(filename);
 	if (format == format_unsuported)
 	{
-		write(STDOUT_FILENO, "File is not .fdf or .obj\n", 25);
+		ft_putstr_fd("File is not .fdf or .obj\n", STDOUT_FILENO);
 		return (NULL);
 	}
 	lines = get_file_lines(filename);
