@@ -20,7 +20,18 @@
 # include "libft.h"
 # include "mesh.h"
 # include "del_dup_edges.h"
-# include <stdio.h>
+
+typedef struct s_format_fdf_helper
+{
+	size_t	word_per_line;
+	size_t	line_count;
+	t_edge	*edges;
+	size_t	edges_size;
+	t_vec3d	*vertices;
+	size_t	vertices_size;
+	t_mesh	*mesh;
+}	t_format_fdf_helper;
+
 
 char	**get_lines_of_file(char *str);
 char	*get_file_str(char *path);
