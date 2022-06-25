@@ -4,7 +4,7 @@ CC = gcc
 
 CFLAGS = -g3  -Wall -Werror -Wextra
 
-SRCS = fdf_init.c draw.c mlx_event.c $(wildcard parser/*.c) $(wildcard ft_3d/*.c) $(wildcard del_dup_edges/*.c) $(wildcard ft_qsort/*.c)
+SRCS = $(wildcard *.c) $(wildcard parser/*.c) $(wildcard ft_3d/*.c) $(wildcard del_dup_edges/*.c) $(wildcard ft_qsort/*.c)
 
 OBJS = $(SRCS:.c=.o)
 
