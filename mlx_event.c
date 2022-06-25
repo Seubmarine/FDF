@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 02:05:08 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/24 18:07:37 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/25 19:30:22 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static void	isometric_movement(t_mesh *mesh, t_vec3d	dir)
 {
 	size_t			i;
 	t_vec3d			v;
-	t_mat4x4		proj;
 	static float	scale = 0;
 	static t_vec3d	all_dir = {0, 10, 0};
 
