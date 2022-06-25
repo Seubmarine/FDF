@@ -32,7 +32,6 @@ typedef struct s_format_fdf_helper
 	t_mesh	*mesh;
 }	t_format_fdf_helper;
 
-
 char	**get_lines_of_file(char *str);
 char	*get_file_str(char *path);
 size_t	str_count_word(char *str);

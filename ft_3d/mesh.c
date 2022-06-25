@@ -21,6 +21,10 @@ t_edge	edge(size_t a, size_t b)
 	return (e);
 }
 
+//printf("mesh total size in byte: %lu\n", t_byte);
+//printf("\tmesh size: %lu\n", m_byte);
+//printf("\tedge size: %lu, byte: %lu\n", e_byte / sizeof(t_edge), e_byte);
+//printf("\tvert size: %lu, byte: %lu\n", v_byte / sizeof(t_vec3d) / 2, v_byte);
 t_mesh	*mesh_init(size_t vertices_size, t_vec3d *vertices,
 size_t edges_size, t_edge *edges)
 {
@@ -30,10 +34,6 @@ size_t edges_size, t_edge *edges)
 	const size_t	e_byte = sizeof(*mesh->edges) * edges_size;
 	const size_t	t_byte = m_byte + v_byte + e_byte;
 
-	printf("mesh total size in byte: %lu\n", t_byte);
-	printf("\tmesh size: %lu\n", m_byte);
-	printf("\tedge size: %lu, byte: %lu\n", e_byte / sizeof(t_edge), e_byte);
-	printf("\tvert size: %lu, byte: %lu\n", v_byte / sizeof(t_vec3d) / 2, v_byte);
 	mesh = malloc(t_byte);
 	ft_bzero(mesh, t_byte);
 	if (!mesh)

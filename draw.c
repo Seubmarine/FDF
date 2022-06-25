@@ -110,5 +110,4 @@ void	image_draw_line(t_img img, int x0, int y0, int x1, int y1, int rgb) {
 }
 */
 
-
 //0xFF34EBE5

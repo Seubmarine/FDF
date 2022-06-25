@@ -87,11 +87,11 @@ void	do_proj(enum e_proj_mode proj_mode, t_mlx_info *info, t_vec3d key_dir, \
 	}
 }
 
+//printf("%d\n", keycode);
 int	key_event(int keycode, t_mlx_info *info)
 {
 	t_vec3d	key_dir;
 
-	printf("%d\n", keycode);
 	if (keycode == KEY_P)
 		switch_projection_mode(&(info->proj));
 	key_dir = key_move(keycode, info);
