@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 13:21:50 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/24 18:03:30 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/25 20:28:28 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 enum e_proj_mode {
 	mode_perspective,
-	mode_paralel
+	mode_isometric
 };
 
 typedef struct s_camera

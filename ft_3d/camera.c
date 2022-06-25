@@ -6,7 +6,7 @@
 /*   By: tbousque <tbousque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 18:01:23 by tbousque          #+#    #+#             */
-/*   Updated: 2022/06/24 13:52:51 by tbousque         ###   ########.fr       */
+/*   Updated: 2022/06/25 20:30:09 by tbousque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ t_mat4x4	set_isometric_matrix(void)
 	t_mat4x4	rot;
 
 	rot = mat4x4_product(
-			mat4x4_rotate_z(to_rad(-35)), \
-			mat4x4_rotate_y(to_rad(45))
+			mat4x4_rotate_z(to_rad(-30)), \
+			mat4x4_rotate_y(to_rad(30))
 			);
 	return (rot);
 }
@@ -53,7 +53,7 @@ t_projection	set_all_proj(float near, float far, float fov,
 
 	p.perspective = set_perspective_matrix(near, far, fov, aspect_ratio);
 	p.isometric = set_isometric_matrix();
-	p.mode = mode_perspective;
+	p.mode = mode_isometric;
 	return (p);
 }
 
